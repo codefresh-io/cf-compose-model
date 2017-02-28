@@ -9,8 +9,8 @@ steps:
   unit_test:
     title: Running unit tests
     image: ${{build_image}}
-    working_directory: /cf-compose-model
     commands:
+      - ls
       - npm run test
 
   push_to_registry:
