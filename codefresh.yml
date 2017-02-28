@@ -22,7 +22,7 @@ steps:
     title: Publishing To Npm
     image: ${{build_image}}
     commands:
-      - yarn run ci-publish
+      - NPM_TOKEN=${{NPM_TOKEN}} npm run ci-publish
     when:
       branch:
         only: [ master ]
