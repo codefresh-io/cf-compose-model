@@ -9,9 +9,8 @@ steps:
   unit_test:
     title: Running unit tests
     image: ${{build_image}}
-    working_directory: /cf-compose-model
     commands:
-      - npm run test
+      - yarn run test
 
   push_to_registry:
     title: Pushing to registry...
@@ -21,15 +20,9 @@ steps:
 
   deploy_to_npm:
     title: Publishing To Npm
-    image: '${{build_image}}'
-    working_directory: IMAGE_WORK_DIR
-    entry_point:
-      - /bin/sh
-      - /codefresh/volume/cf-generated/deploy_script
-    create_file:
-      path: /codefresh/volume/cf-generated
-      name: deploy_script
-      content: npm run ci-publish
+    image: ${{build_image}}
+    commands:
+      - yarn run ci-publish
     when:
       branch:
         only: [ master ]

@@ -1,10 +1,15 @@
 FROM node:6.9.2
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN npm install --global yarn
 
-COPY package.json /usr/src/app/
-RUN npm install --silent
-COPY . /usr/src/app
+COPY ./package.json /app/
 
-CMD [ "npm", "start" ]
+RUN cd /app && yarn install
+
+COPY . /app/
+
+WORKDIR /app
+
+CMD [ "yarn", "start" ]
+
+EXPOSE 3000
