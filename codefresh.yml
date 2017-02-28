@@ -23,6 +23,3 @@ steps:
     image: ${{build_image}}
     commands:
       - yarn run ci-publish
-    when:
-      branch:
-        only: [ master ]
