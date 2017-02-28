@@ -4,8 +4,8 @@
 
 Codefresh introducing CF-Compose-Model, our model for all compositions.
 Using our compose model you can:
-1. Verify that your composition is valid on Codefresh.io
-2. Convert Composition from one type to another
+ * Verify that your composition is valid on Codefresh.io
+ * Convert Composition from one type to another
 
 Road-map:
 - [ ] Support Compose V1
