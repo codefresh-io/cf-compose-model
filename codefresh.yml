@@ -6,6 +6,13 @@ steps:
     type: build
     image_name: codefreshio/cf-compose-model
 
+  unit_test:
+    title: Running unit tests
+    image: ${{build_image}}
+    working_directory: /cf-compose-model
+    commands:
+      - npm run test
+
   push_to_registry:
     title: Pushing to registry...
     type: push
