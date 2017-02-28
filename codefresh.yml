@@ -22,4 +22,6 @@ steps:
     title: Publishing To Npm
     image: ${{build_image}}
     commands:
-      - NPM_TOKEN=${{NPM_TOKEN}} yarn run ci-publish
+      - env
+      
+      - NPM_TOKEN=${{NPM_TOKEN}} npm run ci-publish
