@@ -4,7 +4,7 @@ steps:
   build_image:
     title: Builder image ...
     type: build
-    image_name: codefreshio/cfcomposemodel
+    image_name: codefreshio/cf-compose-model
 
   push_to_registry:
     title: Pushing to registry...
