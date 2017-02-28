@@ -10,7 +10,7 @@ steps:
     title: Running unit tests
     image: ${{build_image}}
     commands:
-      - ls
+      - npm isntall
       - npm run test
 
   push_to_registry:
