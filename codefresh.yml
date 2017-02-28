@@ -10,8 +10,7 @@ steps:
     title: Running unit tests
     image: ${{build_image}}
     commands:
-      - ls
-      - npm run test
+      - yarn run test
 
   push_to_registry:
     title: Pushing to registry...
