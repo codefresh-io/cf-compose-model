@@ -1,5 +1,6 @@
 dbpostgres:
  image: postgres:9.4 #define the image to get
+ container_name: 'db'
  volumes_from:
   - dbstore
  ports:
