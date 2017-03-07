@@ -10,6 +10,7 @@ steps:
     title: Running unit tests
     image: ${{build_image}}
     commands:
+      - yarn install
       - yarn run test
 
   push_to_registry:

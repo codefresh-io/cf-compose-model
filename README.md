@@ -8,7 +8,7 @@ Using our compose model you can:
  * Convert Composition from one type to another
 
 Road-map:
-- [ ] Support Compose V1
+- [X] Support Compose V1
 - [ ] Support Compose V2
 - [ ] Support Compose V3
 - [ ] CLI tool

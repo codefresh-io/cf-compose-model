@@ -1,0 +1,21 @@
+version: '2'
+services:
+  dbpostgres:
+    ports:
+      - '5432:5432'
+    image: 'postgres:9.4'
+    container_name: db
+    volumes_from:
+      - dbstore
+  express-app-container:
+    ports:
+      - '3000:3000'
+    volumes:
+      - './:/app'
+    build: .
+    links:
+      - dbpostgres
+  dbstore:
+    image: 'ubuntu'
+
+
