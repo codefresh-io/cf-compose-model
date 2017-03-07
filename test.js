@@ -1,4 +1,3 @@
-const CF = require('./');
-const ComposeModel = CF.ComposeModel;
-const compose = ComposeModel.load('/Users/oleg/workspace/codefresh/cf-compose-model/lib/tests/yml1.yaml');
-console.log(compose.getWarnings());
+const YAML = require('yamljs');
+const yaml = YAML.load('/Users/oleg/workspace/codefresh/cf-compose-model/lib/model/tests/ComposeV1/ex2.yaml');
+console.log(YAML.stringify(yaml, 4, 2));

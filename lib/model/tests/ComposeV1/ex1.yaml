@@ -13,3 +13,5 @@ express-app-container:
   - ./:/app
  links:
   - dbpostgres
+dbstore:
+  image: 'ubuntu'
