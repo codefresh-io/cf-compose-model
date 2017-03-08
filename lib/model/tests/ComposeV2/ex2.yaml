@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  web:
+    image: myapp
+    networks:
+      - front
+      - back
+  redis:
+    image: redis
+    volumes:
+      - redis-data:/var/lib/redis
+    networks:
+      - back
+
+volumes:
+  redis-data:
+    driver: flocker
+
+networks:
+  front:
+    driver: overlay
+  back:
+    driver: overlay
