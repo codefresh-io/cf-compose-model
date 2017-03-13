@@ -1,22 +1,26 @@
 ## Codefresh Compose Model
 
-[![Codefresh build status]( https://g.codefresh.io/api/badges/build?repoOwner=codefresh-io&repoName=cf-compose-model&branch=master&pipelineName=cf-compose-model&accountName=codefresh-inc&key=eyJhbGciOiJIUzI1NiJ9.NTY3MmQ4ZGViNjcyNGI2ZTM1OWFkZjYy.AN2wExsAsq7FseTbVxxWls8muNx_bBUnQWQVS8IgDTI&type=cf-2)]( https://g.codefresh.io/repositories/codefresh-io/cf-compose-model/builds?filter=trigger:build;branch:master;service:58b4563445a0ac0100a91975~cf-compose-model)
+[![Codefresh build status]( https://g.codefresh.io/api/badges/build?repoOwner=codefresh-io&repoName=cf-compose-model&branch=master&pipelineName=cf-compose-model&accountName=codefresh-inc&type=cf-2)]( https://g.codefresh.io/repositories/codefresh-io/cf-compose-model/builds?filter=trigger:build;branch:master;service:58b4563445a0ac0100a91975~cf-compose-model)
 
 Codefresh introducing CF-Compose-Model, our model for all compositions.
 Using our compose model you can:
  * Verify that your composition is valid on Codefresh.io
  * Convert Composition from one type to another
 
+Start here:
+ * `npm install` to install all dependencies
+ * `node example.js` to run the basic examples we provided
+
 Road-map:
 - [X] Support Compose V1
-- [ ] Support Compose V2
+- [X] Support Compose V2
 - [ ] Support Compose V3
 - [ ] CLI tool
 - [ ] ES5 module
 
 ## Documantation
 
-### Become familiar with ComposeModel stracture
+### Become familiar with ComposeModel structure
 ComposeModel holds inside 3 basic objects - each one of the objects holds in instances of `CFNode` class:
 * services
 * networks
@@ -33,6 +37,9 @@ Methods of ComposeModel:
     * parse(yaml) - Parse an yaml, search for a parser for the yaml file, parse it and return ComposeModel instance. Throw an error `parser not found' if there is no parser.
     * load(path) - Loads the yaml and parse it the same way the `parse` does.
 * public:
+    * getAllServices() - return an object with all the services
+    * getAllNetworks() - return an object with all the networks
+    * getAllVolumes() - return an object with all the volumes
     * setPolicy(policy) - set the policy. Policies can be found in `lib/model/policies`.
     * addService(service) - add new service to the model
     * addNetwork(network) - add new network to the model
@@ -41,11 +48,6 @@ Methods of ComposeModel:
     * getWarnings() - return an array with all the warnings related to the model and the policy
     * fixWarnings(onlyAutoFix) - fix all the warnings on the model related to the policy. If `onlyAutoFix` flag is set then only warnings with this flag will be fixed. 
 
-### CFNode and CFLeaf
-
-CFNode holds inside CFLeaf and other objects. - Read more about CFNode in `/lib/model/components/CFNodeReadme.md`
-
-CFLeaf is a class that Codefresh may use to change,remove or overwrite the original yaml in order to run it in Codefresh servers. Read more about CFLeaf in `/lib/model/components/CFLeafReadme.md` 
 
 
 
