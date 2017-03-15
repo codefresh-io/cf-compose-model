@@ -1,7 +1,6 @@
 'use strict';
 
 const path         = require('path');
-const fs           = require('fs');
 const CM           = require('./');
 const ComposeModel = CM.ComposeModel;
 const Service      = CM.components.Service;

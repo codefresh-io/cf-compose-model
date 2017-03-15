@@ -1,0 +1,7 @@
+version: '2'
+services:
+  web:
+    image: ubuntu
+networks:
+  network-name:
+    not_compose_field: 'some value'

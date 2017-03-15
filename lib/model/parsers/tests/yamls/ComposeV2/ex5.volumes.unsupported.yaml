@@ -1,0 +1,7 @@
+version: '2'
+services:
+  web:
+    image: ubuntu
+volumes:
+  volume-name:
+    not_compose_field: 'some value'
