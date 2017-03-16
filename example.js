@@ -8,10 +8,10 @@ const Service      = CM.components.Service;
 /*Examples*/
 
 const paths = [
-    './lib/model/tests/ComposeV1/ex1.yaml',
+    // './lib/model/tests/ComposeV1/ex1.yaml',
     './lib/model/tests/ComposeV2/ex2.yaml',
+    // './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
 ];
-
 paths.map((location) => {
 
     console.log(`#############################`);
@@ -21,10 +21,12 @@ paths.map((location) => {
     location = path.resolve(__dirname, location);
     console.log(`Loaded path ${location}`);
     ComposeModel.load(location)
-        .then((compose) => {
-            return compose.translate()
+        .then(compose => {
+            return compose.getErrorsAndWornings();
         })
-        .then(console.log);
+        .then((errors) => {
+            console.log(errors)
+        })
     // console.log('Parsed');
     // console.log('Show warnings');
     // console.log(compose.getWarnings());
