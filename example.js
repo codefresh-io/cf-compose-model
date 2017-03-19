@@ -7,30 +7,39 @@ const Service      = CM.components.Service; // jshint ignore:line
 
 /*Examples*/
 
-const paths = [
-    './lib/model/tests/ComposeV1/ex1.yaml',
-    './lib/model/tests/ComposeV2/ex2.yaml',
-    './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
-];
-paths.map((location) => {
-
-    console.log(`#############################`);
-    console.log(`Example load yaml from location ${location}`);
-
-
-    location = path.resolve(__dirname, location);
-    console.log(`Loaded path ${location}`);
-    ComposeModel.load(location)
-        .then(compose => {
-            return compose.getErrorsAndWornings();
-        })
-        .then((errors) => {
-            console.log(errors);
-        });
-});
+// const paths = [
+//     './lib/model/tests/ComposeV1/ex1.yaml',
+//     './lib/model/tests/ComposeV2/ex1.yaml',
+//     './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
+// ];
+// paths.map((location) => {
+//
+//     console.log(`#############################`);
+//     console.log(`Example load yaml from location ${location}`);
+//
+//
+//     location = path.resolve(__dirname, location);
+//     console.log(`Loaded path ${location}`);
+//     let cm;
+//     ComposeModel.load(location)
+//         .then(compose => {
+//             cm = compose;
+//             return compose.getErrorsAndWarnings();
+//         })
+//         .then((errors) => {
+//             console.log(errors);
+//             return cm.translate();
+//         })
+//         .then((translated) => {
+//             console.log(translated);
+//         });
+//
+// });
 
 console.log(`Example starting from scratch`);
 console.log(`#############################`);
+
+
 
 const cm      = new ComposeModel();
 const service = new Service('os')

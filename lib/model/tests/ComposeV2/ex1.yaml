@@ -17,5 +17,7 @@ services:
       - dbpostgres
   dbstore:
     image: 'ubuntu'
+    volumes:
+      './app': '/usr/'
 
 
