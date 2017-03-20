@@ -1,0 +1,6 @@
+web:
+  image: ubuntu
+  ports: 8080
+db:
+  image: mongo
+  ports: '2376'

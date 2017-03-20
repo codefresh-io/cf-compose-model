@@ -1,0 +1,3 @@
+web:
+  image: ubuntu
+  not_supported: true
