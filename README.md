@@ -14,7 +14,7 @@ Start here:
 Road-map:
 - [X] Support Compose V1
 - [X] Support Compose V2
-- [ ] Support Compose V3
+- [X] Support Compose V3
 - [ ] CLI tool
 - [ ] ES5 module
 
