@@ -16,6 +16,8 @@ services:
 volumes:
   redis-data:
     driver: flocker
+  mongo-data:
+    driver: local
 
 networks:
   front:

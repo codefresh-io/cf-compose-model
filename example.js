@@ -1,95 +1,101 @@
 'use strict';
 
-const path = require('path');
-const fs   = require('fs');
+const path         = require('path');
+const CM           = require('./');
+const ComposeModel = CM.ComposeModel;
+const Service      = CM.components.Service;
 
-// Replace with when running outside of the module
-// const CM = require('cf-compose-model');
-const CM                  = require('./');
-const ComposeModel        = CM.ComposeModel;
-const ComposeV2Translator = CM.translators.ComposeV2;
+const Promise      = require('bluebird'); // jshint ignore:line
 
-const paths = [
-    './lib/model/tests/ComposeV1/ex1.yaml',
-    './lib/model/tests/ComposeV1/ex2.yaml',
-    './lib/model/tests/ComposeV2/ex1.yaml',
-];
+/**
+ * In this example the compose model will be initiate using existing yamls
+ * The first step is to load the yaml, using ComposeModel.load
+ * After that showing all the warnings and errors that might be on the yaml using getErrorsAndWarnings
+ * The last step is to translate is back to the same yaml using translate method
+ */
+function withYamlFiles() {
+    const paths = [
+        './lib/model/tests/ComposeV1/ex1.yaml',
+        './lib/model/tests/ComposeV2/ex1.yaml',
+        './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
+    ];
+    return Promise.map(paths, (location) => {
 
-
-paths.map((location) => {
-    location = path.resolve(__dirname, location);
-    console.log(`Loaded path ${location}`);
-    const compose = ComposeModel.load(location);
-    console.log('Parsed');
-    console.log('Show warnings');
-    console.log(compose.getWarnings());
-
-    console.log('Fix warnings');
-    compose.fixWarnings();
-
-    console.log('Show warnings after fix');
-    console.log(compose.getWarnings());
-
-    console.log('Translate with default translator');
-    console.log(compose.translate());
-});
-
-paths.map((location) => {
-    location      = path.resolve(__dirname, location);
-    const yamlStr = fs.readFileSync(location, 'utf8');
-    const compose = ComposeModel.parse(yamlStr);
-    console.log('Parsed');
-    console.log('Show warnings');
-    console.log(compose.getWarnings());
-
-    console.log('Fix warnings');
-    compose.fixWarnings();
-
-    console.log('Show warnings after fix');
-    console.log(compose.getWarnings());
-
-    console.log('Translate with default translator');
-    console.log(compose.translate());
-});
+        console.log(`#############################`);
+        console.log(`Example load yaml from location ${location}`);
 
 
-/*Examples*/
+        location = path.resolve(__dirname, location);
+        console.log(`Loaded path ${location}`);
+        let cm;
+        return ComposeModel.load(location)
+            .then(compose => {
+                cm = compose;
+                return compose.getErrorsAndWarnings();
+            })
+            .then((errors) => {
+                console.log(errors);
+                return cm.translate();
+            })
+            .then((translated) => {
+                console.log(translated);
+            });
+
+    });
+}
 
 
-//Create Image
-const Image = CM.components.Image;
-const image = new Image()
-    .setOwner('codefresh-io')
-    .setRepo('cf-compose-model');
+/**
+ * In this example the compose model initiate from scratch
+ * The first step is to init new ComposeModel
+ * After that will create new service with image, port, volume, environment variable and more additional data
+ * The service should be added to the model using addService
+ * At this point the ComposeModel is ready for use
+ * translate can be called with any translator to get the ComposeModel translate to the specific version
+ * All the translator can be found at require('cf-compose-model').translators
+ * @return {*}
+ */
+function fromScratch() {
+    const cm      = new ComposeModel();
+    const service = new Service('os')
+        .setImage('ubuntu')
+        .addPort('80:80')
+        .addVolume('./app:/core')
+        .addEnvironmentVariable('TIME', Date.now())
+        .setAdditionalData('dockerfile', './Dockerfile');
+    cm.addService(service);
+    return cm.translate(CM.translators.ComposeV1)
+        .then(translated => {
+            console.log(translated);
+        })
+        .then(() => {
+            return cm.getWarnings();
+        })
+        .then(warnings => {
+            console.log(warnings);
+        })
+        .then(() => {
+            return cm.fixWarnings();
+        })
+        .then(() => {
+            return cm.getWarnings();
+        })
+        .then(warnings => {
+            console.log(warnings);
+        })
+        .then(() => {
+            return cm.translate(CM.translators.ComposeV1);
+        })
+        .then(translated => {
+            console.log(translated);
+        });
+}
 
-//Create Volume
-const Volume         = CM.components.Volume;
-const volumeInstance = new Volume()
-    .setTarget('/app');
+Promise.resolve()
+    .then(withYamlFiles)
+    .then(fromScratch)
+    .done();
 
-//Create Port
-const Port = CM.components.Port;
-const port = new Port().setTarget('80');
 
-console.log(image.toString());
-console.log(volumeInstance.toString());
-console.log(port.toString());
 
-//Create Service
-const Service = CM.components.Service;
 
-const service = new Service('db');
-service.setImage(image);
-service.addPort(port);
-
-const GlobalVolume        = CM.components.GlobalVolume;
-const globalVolumeInstace = new GlobalVolume('db-driver', { driver: 'flocker' });
-
-const Network = CM.components.Network;
-const network = new Network('front', { driver: 'overlay' });
-
-const cm = new ComposeModel();
-cm.addService(service);
-cm.addVolume(globalVolumeInstace);
-cm.addNetwork(network);
-console.log(cm.translate(ComposeV2Translator));
