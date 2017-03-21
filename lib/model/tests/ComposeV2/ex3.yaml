@@ -1,0 +1,7 @@
+version: '2'
+services:
+  bamigrash:
+    image: francescou/docker-compose-ui:1.4.1
+    ports:
+      - '5001:9000'
+    working_dir: /opt/docker-compose-projects/
