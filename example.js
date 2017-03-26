@@ -33,8 +33,20 @@ function withYamlFiles() {
                 cm = compose;
                 return compose.getErrorsAndWarnings();
             })
-            .then((errors) => {
-                console.log(errors);
+            .then((errorsAndWarnings) => {
+                const errors = errorsAndWarnings.errors;
+                const warnings = errorsAndWarnings.warnings;
+                return Promise.map(warnings, (warning) => {
+                    console.log(warning.format());
+                })
+                    .then(() => {
+                        return Promise.map(errors, (error) => {
+                            console.log(error.format());
+                        });
+                    });
+
+            })
+            .then(() => {
                 return cm.translate();
             })
             .then((translated) => {
@@ -72,7 +84,9 @@ function fromScratch() {
             return cm.getWarnings();
         })
         .then(warnings => {
-            console.log(warnings);
+            return Promise.map(warnings, (warning) => {
+                console.log(warning.format());
+            });
         })
         .then(() => {
             return cm.fixWarnings();
@@ -81,7 +95,9 @@ function fromScratch() {
             return cm.getWarnings();
         })
         .then(warnings => {
-            console.log(warnings);
+            return Promise.map(warnings, (warning) => {
+                console.log(warning.format());
+            });
         })
         .then(() => {
             return cm.translate(CM.translators.ComposeV1);
