@@ -13,5 +13,8 @@ volumes:
   mongo-data-pass:
     external:
       name: ${{CF_VOLUME}}
-  mongo-fail:
-    external: false
+  mongo-default-driver-pass:
+  local-volume-pass:
+    driver: local
+  local-volume-fail:
+    driver: flunker
