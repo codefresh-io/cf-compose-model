@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  web:
+    image: express
+    ports:
+      - 8080
+
+##both should be supported by shared plan
+volumes:
+  data-pass:
+    external: true
+  mongo-data-pass:
+    external:
+      name: ${{CF_VOLUME}}
+  mongo-default-driver-pass:
+  local-volume-pass:
+    driver: local
+  local-volume-fail:
+    driver: flunker
