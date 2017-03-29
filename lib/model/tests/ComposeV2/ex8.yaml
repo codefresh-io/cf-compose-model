@@ -1,0 +1,6 @@
+version: '2'
+service:
+  os:
+    image: redis
+volumes:
+  data: 'value'
