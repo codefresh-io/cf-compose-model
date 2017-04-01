@@ -1,0 +1,6 @@
+os:
+  image: 'ubuntu'
+  volumes: './app'
+  ports:
+    - '80:80'
+    - 'abc:789'
