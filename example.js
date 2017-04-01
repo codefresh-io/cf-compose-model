@@ -16,8 +16,8 @@ const Promise      = require('bluebird'); // jshint ignore:line
 function withYamlFiles() {
     const paths = [
         './lib/model/tests/ComposeV1/ex1.yaml',
-        './lib/model/tests/ComposeV2/ex1.yaml',
-        './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
+        // './lib/model/tests/ComposeV2/ex1.yaml',
+        // './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
     ];
     return Promise.mapSeries(paths, (location) => {
         console.log(`\n#############################\nExample load yaml from location ${location}\n#############################`);
@@ -27,22 +27,14 @@ function withYamlFiles() {
         return ComposeModel.load(location)
             .then(compose => {
                 cm = compose;
-                return compose.getErrorsAndWarnings();
+                return compose.getWarnings();
             })
-            .then((errorsAndWarnings) => {
-                const errors = errorsAndWarnings.errors;
-                const warnings = errorsAndWarnings.warnings;
+            .then((warnings) => {
 
                 console.log('\n===\nWarnings\n===');
                 return Promise.map(warnings, (warning) => {
                     console.log(warning.format());
-                })
-                    .then(() => {
-                        console.log('\n===\nErrors\n===');
-                        return Promise.map(errors, (error) => {
-                            console.log(error.format());
-                        });
-                    });
+                });
 
             })
             .then(() => {

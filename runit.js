@@ -7,6 +7,18 @@ const ComposeModel = CM.ComposeModel;
 
 const Promise = require('bluebird'); // jshint ignore:line
 
+
+/**
+ * Currently supported only for compose v1
+ * From now the flow will be as follow:
+ * 1. load or parse yaml
+ * 2.
+ * 2.1 get the composeModel if the parsing is success
+ * 2.1 catch the error. the error object will have additional data:
+ * 2.1.1 err.errors | array | objects that represent the error. use .format() and print the data
+ * 2.1.2 err.warnings | array | in case that we can see the warnings the error object will have also additional warnings . NOT INCLUDED YET
+ * @return {*}
+ */
 function withYamlFiles() {
     const paths = [
         './test-compose.yaml'
