@@ -1,6 +1,10 @@
-os:
-  image: 'ubuntu'
-  volumes: './app'
-  ports:
-    - '80:80'
-    - 'abc:789'
+version: '2'
+services:
+  os:
+    image: 'ubuntu'
+    volumes: './app'
+    ports:
+      - '80:80'
+      - 'abc:789'
+    a: 1
+

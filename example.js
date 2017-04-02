@@ -105,9 +105,30 @@ function fromScratch() {
         });
 }
 
+function withErrors(){
+    const yaml = {
+        version: '2',
+        services: {
+            os: {
+                iamge: 'not image - should return an error',
+                ports: 'no valid type',
+                volumes: {
+                    './app': 'warning - not allowed in policy'
+                }
+            }
+        }
+    };
+
+    return ComposeModel.parse(yaml)
+        .catch(err => {
+            console.log(err.toString());
+        })
+}
+
 Promise.resolve()
-    .then(withYamlFiles)
-    .then(fromScratch)
+    // .then(withYamlFiles)
+    // .then(fromScratch)
+    .then(withErrors)
     .done();
 
 
