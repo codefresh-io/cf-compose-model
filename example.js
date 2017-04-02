@@ -15,7 +15,8 @@ const Promise      = require('bluebird'); // jshint ignore:line
  */
 function withYamlFiles() {
     const paths = [
-        './lib/model/tests/ComposeV1/ex1.yaml',
+        // './lib/model/tests/ComposeV1/ex1.yaml',
+        './test-compose.yaml',
         // './lib/model/tests/ComposeV2/ex1.yaml',
         // './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
     ];
@@ -105,30 +106,9 @@ function fromScratch() {
         });
 }
 
-function withErrors(){
-    const yaml = {
-        version: '2',
-        services: {
-            os: {
-                iamge: 'not image - should return an error',
-                ports: 'no valid type',
-                volumes: {
-                    './app': 'warning - not allowed in policy'
-                }
-            }
-        }
-    };
-
-    return ComposeModel.parse(yaml)
-        .catch(err => {
-            console.log(err.toString());
-        })
-}
-
 Promise.resolve()
-    // .then(withYamlFiles)
-    // .then(fromScratch)
-    .then(withErrors)
+    .then(withYamlFiles)
+    .then(fromScratch)
     .done();
 
 
