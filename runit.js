@@ -112,7 +112,7 @@ function run() {
 }
 
 
-return Promise.resolve()
+Promise.resolve()
     .then(run)
     .done(() => {
         //check what found
