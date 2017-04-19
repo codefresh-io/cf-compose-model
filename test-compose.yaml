@@ -1,51 +1,55 @@
-version: "2
+version: "2"
+
 services:
-  vote:
-    build: ./vote
-    command: python app.py
-    volumes:
-     - ./vote:/app
-    ports:
-      - "5000:80"
-    networks:
-      - front-tier
-      - back-tier
-
-  result:
-    build: ./result
-    command: nodemon --debug server.js
-    volumes:
-      - ./result:/app
-    ports:
-      - "5001:80"
-      - "5858:5858"
-    networks:
-      - front-tier
-      - back-tier
-
-  worker:
-    build: ./worker
-    networks:
-      - back-tier
 
   redis:
-    image: redis:alpine
-    container_name: redis
-    ports: ["6379"]
+    image: redis:3.2-alpine
+    ports:
+      - "6379"
     networks:
-      - back-tier
+      - voteapp
+
 
   db:
     image: postgres:9.4
-    container_name: db
     volumes:
-      - "db-data:/var/lib/postgresql/data"
+      - db-data:/var/lib/postgresql/data
     networks:
-      - back-tier
+      - voteapp
+
+
+  voting-app:
+    image: gaiadocker/example-voting-app-vote:good
+    ports:
+      - 80
+    networks:
+      - voteapp
+    depends_on:
+      - redis
+
+
+  result-app:
+    image: gaiadocker/example-voting-app-result:latest
+    ports:
+      - 80
+    networks:
+      - voteapp
+    depends_on:
+      - db
+
+  worker:
+    image: gaiadocker/example-voting-app-worker:latest
+    networks:
+      voteapp:
+        aliases:
+          - workers
+    depends_on:
+      - db
+      - redis
+
+
+networks:
+    voteapp:
 
 volumes:
   db-data:
-
-networks:
-  front-tier:
-  back-tier:
