@@ -1,0 +1,7 @@
+{
+  "name": "mytest1",
+  "steps": [
+    {"name": "loading", "file": "file"}
+  ]
+}
+
