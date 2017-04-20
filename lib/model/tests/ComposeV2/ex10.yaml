@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  vote:
+    image: image
+
+volumes:
+  vol:
+
+networks:
+  net:

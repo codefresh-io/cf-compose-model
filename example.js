@@ -15,41 +15,34 @@ const Promise      = require('bluebird'); // jshint ignore:line
  */
 function withYamlFiles() {
     const paths = [
-        './lib/model/tests/ComposeV1/ex1.yaml',
-        './lib/model/tests/ComposeV2/ex1.yaml',
-        './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
+        // './lib/model/tests/ComposeV1/ex1.yaml',
+        './test-compose.yaml',
+        // './lib/model/tests/ComposeV2/ex1.yaml',
+        // './lib/model/parsers/tests/yamls/ComposeV1/ex1.image.yaml'
     ];
-    return Promise.map(paths, (location) => {
-
-        console.log(`#############################`);
-        console.log(`Example load yaml from location ${location}`);
-
+    return Promise.mapSeries(paths, (location) => {
+        console.log(`\n#############################\nExample load yaml from location ${location}\n#############################`);
 
         location = path.resolve(__dirname, location);
-        console.log(`Loaded path ${location}`);
         let cm;
         return ComposeModel.load(location)
             .then(compose => {
                 cm = compose;
-                return compose.getErrorsAndWarnings();
+                return compose.getWarnings();
             })
-            .then((errorsAndWarnings) => {
-                const errors = errorsAndWarnings.errors;
-                const warnings = errorsAndWarnings.warnings;
+            .then((warnings) => {
+
+                console.log('\n===\nWarnings\n===');
                 return Promise.map(warnings, (warning) => {
                     console.log(warning.format());
-                })
-                    .then(() => {
-                        return Promise.map(errors, (error) => {
-                            console.log(error.format());
-                        });
-                    });
+                });
 
             })
             .then(() => {
-                return cm.translate();
+                return cm.translate().toYaml();
             })
             .then((translated) => {
+                console.log('\n===\nOutput\n===');
                 console.log(translated);
             });
 
@@ -68,6 +61,8 @@ function withYamlFiles() {
  * @return {*}
  */
 function fromScratch() {
+    console.log(`\n#############################\nExample from scratch\n#############################`);
+
     const cm      = new ComposeModel();
     const service = new Service('os')
         .setImage('ubuntu')
@@ -76,14 +71,16 @@ function fromScratch() {
         .addEnvironmentVariable('TIME', Date.now())
         .setAdditionalData('dockerfile', './Dockerfile');
     cm.addService(service);
-    return cm.translate(CM.translators.ComposeV1)
+    return cm.translate(CM.translators.ComposeV1).toYaml()
         .then(translated => {
+            console.log('\n===\nOutput before fixing warnings\n===');
             console.log(translated);
         })
         .then(() => {
             return cm.getWarnings();
         })
         .then(warnings => {
+            console.log('\n===\nWarnings\n===');
             return Promise.map(warnings, (warning) => {
                 console.log(warning.format());
             });
@@ -95,14 +92,16 @@ function fromScratch() {
             return cm.getWarnings();
         })
         .then(warnings => {
+            console.log('\n===\nWarnings after calling fix warnings\n===');
             return Promise.map(warnings, (warning) => {
                 console.log(warning.format());
             });
         })
         .then(() => {
-            return cm.translate(CM.translators.ComposeV1);
+            return cm.translate(CM.translators.ComposeV1).toYaml();
         })
         .then(translated => {
+            console.log('\n===\nOutput after fixing warnings\n===');
             console.log(translated);
         });
 }
