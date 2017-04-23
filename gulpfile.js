@@ -14,32 +14,49 @@ require('shelljs/global');
 
 
 gulp.task('no.onlys', function (callback) {
-    exec('find . -path "*/*.spec.js" -type f -exec grep -l "describe.only" {} + \n find . -path "*/*.spec.js" -type f -exec grep -l "it.only" {} +', function (code, output) { // jshint ignore:line
-        if (output) return callback(new Error("The following files contain .only in their tests"));
-        return callback();
-    });
+    exec(
+        'find . -path "*/*.spec.js" -type f -exec grep -l "describe.only" {} + \n find . -path "*/*.spec.js" -type f -exec grep -l "it.only" {} +',
+        function (code, output) { // jshint ignore:line
+            if (output) {
+                return callback(new Error("The following files contain .only in their tests"));
+            }
+            return callback();
+        });
 });
 
 gulp.task('lint', ['clean'], function () {
-    return gulp.src(['**/*.js', '!**/node_modules/**', '!**/server/migration/**', '!coverage/**/*.js'])
-        .pipe(jshint({lookup: true}))
+    return gulp.src(['**/*.js',
+        '!**/node_modules/**',
+        '!**/server/migration/**',
+        '!coverage/**/*.js'
+    ])
+        .pipe(jshint({ lookup: true }))
         .pipe(jshint.reporter('default'))
         .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('unit_pre', function () {
-    return gulp.src(['**/*.js', '!runit.js', '!example.js', '!**/*.spec.js', '!**/node_modules/**/*.js', '!.debug/**/*.js', '!gulpfile.js', '!coverage/**/*.js', '!server/migration/**/*.js'])
+    return gulp.src(['**/*.js',
+        '!runit.js',
+        '!example.js',
+        '!**/*.spec.js',
+        '!**/node_modules/**/*.js',
+        '!.debug/**/*.js',
+        '!gulpfile.js',
+        '!coverage/**/*.js',
+        '!server/migration/**/*.js'
+    ])
         .pipe(istanbul({ // Covering files
             instrumenter: isparta.Instrumenter,
             includeUntested: true
         }))
         .pipe(istanbul.hookRequire()) // Force `require` to return covered files
         .on('finish', function () {
-            gulp.src(['**/*.unit.spec.js', '!**/node_modules/**/*.js'], {read: false})
-                .pipe(mocha({reporter: 'spec', timeout: '10000'}))
+            gulp.src(['**/*.unit.spec.js', '!**/node_modules/**/*.js'], { read: false })
+                .pipe(mocha({ reporter: 'spec', timeout: '10000' }))
                 .pipe(istanbul.writeReports({
                     reporters: ['lcov'],
-                    reportOpts: {dir: 'coverage'}
+                    reportOpts: { dir: 'coverage' }
                 }))
                 .once('end', function () {
                     process.exit();
@@ -47,7 +64,7 @@ gulp.task('unit_pre', function () {
         });
 });
 
-gulp.task('e2e_test_pre', function(){
+gulp.task('e2e_test_pre', function () {
     return gulp.src(['e2e-test/flow.spec.js'])
         .pipe(istanbul({ // Covering files
             instrumenter: isparta.Instrumenter,
@@ -55,11 +72,11 @@ gulp.task('e2e_test_pre', function(){
         }))
         .pipe(istanbul.hookRequire()) // Force `require` to return covered files
         .on('finish', function () {
-            gulp.src(['e2e-test/flow.spec.js'], {read: false})
-                .pipe(mocha({reporter: 'spec', timeout: '10000'}))
+            gulp.src(['e2e-test/flow.spec.js'], { read: false })
+                .pipe(mocha({ reporter: 'spec', timeout: '10000' }))
                 .pipe(istanbul.writeReports({
                     reporters: ['lcov'],
-                    reportOpts: {dir: 'coverage'}
+                    reportOpts: { dir: 'coverage' }
                 }))
                 .once('end', function () {
                     process.exit();
@@ -68,7 +85,7 @@ gulp.task('e2e_test_pre', function(){
 });
 
 gulp.task('clean', function () {
-    return gulp.src(['.coverdata', '.debug', '.coverrun'], {read: false})
+    return gulp.src(['.coverdata', '.debug', '.coverrun'], { read: false })
         .pipe(rimraf());
 });
 
@@ -88,15 +105,17 @@ gulp.task('coveralls', function (callback) {
         return callback(new Error("COVERALLS_TOKEN environment variable is missing"));
     }
     else {
-        fs.writeFile(".coveralls.yml", "service_name: codefresh-io\nrepo_token: " + repo_token, function (err) {
-            if (err) {
-                callback(err);
-            }
-            else {
-                gulp.src('coverage/lcov.info')
-                    .pipe(coveralls());
-            }
-        });
+        fs.writeFile(".coveralls.yml",
+            "service_name: codefresh-io\nrepo_token: " + repo_token,
+            function (err) {
+                if (err) {
+                    callback(err);
+                }
+                else {
+                    gulp.src('coverage/lcov.info')
+                        .pipe(coveralls());
+                }
+            });
     }
 });
 

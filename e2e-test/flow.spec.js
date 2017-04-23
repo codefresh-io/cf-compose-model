@@ -1,11 +1,11 @@
 'use strict';
 
-const fs        = require('fs');
-const path      = require('path');
-const _         = require('lodash');
-const YAML      = require('js-yaml');
-const Promise   = require('bluebird'); // jshint ignore:line
-const steps = require('./steps');
+const fs      = require('fs');
+const path    = require('path');
+const _       = require('lodash');
+const YAML    = require('js-yaml');
+const Promise = require('bluebird'); // jshint ignore:line
+const steps   = require('./steps');
 
 
 
@@ -59,7 +59,6 @@ const folderIterator = (folderPath) => {
         }
     });
 };
-
 
 describe('Compose Model Flow Tests', () => {
     folderIterator(`${__dirname}/tests`);
