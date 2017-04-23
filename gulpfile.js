@@ -1,12 +1,14 @@
-var gulp        = require('gulp');
-var jshint      = require('gulp-jshint');
-var rimraf      = require('gulp-rimraf');
-var runSequence = require('run-sequence');
-var fs          = require('fs');
-var coveralls   = require('gulp-coveralls');
-var istanbul    = require('gulp-istanbul');
-var isparta     = require('isparta');
-var mocha       = require('gulp-mocha');
+"use strict";
+
+const gulp        = require('gulp');
+const jshint      = require('gulp-jshint');
+const rimraf      = require('gulp-rimraf');
+const runSequence = require('run-sequence');
+const fs          = require('fs');
+const coveralls   = require('gulp-coveralls');
+const istanbul    = require('gulp-istanbul');
+const isparta     = require('isparta');
+const mocha       = require('gulp-mocha');
 require('shelljs/global');
 
 
@@ -45,9 +47,34 @@ gulp.task('unit_pre', function () {
         });
 });
 
+gulp.task('e2e_test_pre', function(){
+    return gulp.src(['e2e-test/flow.spec.js'])
+        .pipe(istanbul({ // Covering files
+            instrumenter: isparta.Instrumenter,
+            includeUntested: true
+        }))
+        .pipe(istanbul.hookRequire()) // Force `require` to return covered files
+        .on('finish', function () {
+            gulp.src(['e2e-test/flow.spec.js'], {read: false})
+                .pipe(mocha({reporter: 'spec', timeout: '10000'}))
+                .pipe(istanbul.writeReports({
+                    reporters: ['lcov'],
+                    reportOpts: {dir: 'coverage'}
+                }))
+                .once('end', function () {
+                    process.exit();
+                });
+        });
+});
+
 gulp.task('clean', function () {
     return gulp.src(['.coverdata', '.debug', '.coverrun'], {read: false})
         .pipe(rimraf());
+});
+
+gulp.task('e2e_test', function (callback) {
+    runSequence('e2e_test_pre',
+        callback);
 });
 
 gulp.task('unit_test', function (callback) {

@@ -1,8 +1,6 @@
 'use strict';
 
 const BaseStep = require('./BaseStep');
-const cm       = require('./../../');
-const path     = require('path');
 const YAML     = require('js-yaml');
 
 const chai   = require('chai');
@@ -42,9 +40,9 @@ class Translate extends BaseStep {
                 return cases[expectedResultObj.to](composeModel.translate(),
                     expectedResultObj.result);
             } else {
-                throw new Error(`Translation method ${expectedResultObj.to} not supported`);
+                return Promise.reject(new Error(`Translation method ${expectedResultObj.to} not supported`));
             }
-        }
+        };
     }
 }
 

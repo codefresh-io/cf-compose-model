@@ -11,7 +11,7 @@ chai.use(sinonChai);
 describe('Base steps testimg', () => {
     it('Should throw error when step has no type', () => {
         try {
-            new BaseStep()
+            new BaseStep();
         } catch(err){
             expect(err.message).to.be.equal('Step must have type');
         }
@@ -24,7 +24,7 @@ describe('Base steps testimg', () => {
     it('execType should throw an error when not implemented', () => {
         const step = new BaseStep('some-type');
         try {
-            step.exec()
+            step.exec();
         } catch(err){
             expect(err.message).to.be.deep.equal('Not implemented');
         }

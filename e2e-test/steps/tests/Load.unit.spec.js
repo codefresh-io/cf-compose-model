@@ -87,5 +87,5 @@ describe('Load steps testing', () => {
                 .catch(test.catch)
                 .then(test.then ? test.then : () => {});
         });
-    })
+    });
 });

@@ -7,11 +7,12 @@ steps:
     image_name: codefreshio/cf-compose-model
 
   unit_test:
-    title: Running unit tests
+    title: Running unit and e2e tests
     image: ${{build_image}}
     commands:
       - yarn install
       - yarn run test
+
 
   push_to_registry:
     title: Pushing to registry...

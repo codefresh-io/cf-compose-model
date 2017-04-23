@@ -25,9 +25,9 @@
 ### Get-warnings step: `type: get-warnings`
 | Name  | Type  | Additional  |
 | ------------ | ------------ | ------------ |
-| result  | Array of objects  | Optional |
+| result  | Array of objects or `empty`  | Optional |
 
 ### Get-warnings step: `type: fix-warnings`
 | Name  | Type  | Additional  |
 | ------------ | ------------ | ------------ |
-| result  | Array of objects  | Optional |
+| result  | Array of objects or `empty`  | Optional |

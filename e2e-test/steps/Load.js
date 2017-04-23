@@ -38,8 +38,8 @@ class Load extends BaseStep {
                     } else {
                         throw err;
                     }
-                })
-        }
+                });
+        };
     }
 }
 
