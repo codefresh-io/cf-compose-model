@@ -1,9 +1,0 @@
-{
-  "name": "mytest",
-  "load": "load",
-  "step2": "getWarnings",
-  "step3": "fixWarnings",
-  "step4": "getWarnings",
-  "step5": "translate"
-}
-

@@ -1,0 +1,8 @@
+version: '2'
+services:
+  my-service:
+    image: ubuntu
+
+volumes:
+  db:
+    driver-1: local
