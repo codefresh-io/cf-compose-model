@@ -13,7 +13,7 @@ steps:
       - yarn install
       - yarn run unit_test
 
-  unit_test:
+  e2e_test:
     title: Running e2e tests
     image: ${{build_image}}
     commands:
