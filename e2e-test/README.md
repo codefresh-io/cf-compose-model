@@ -2,9 +2,11 @@
 
 ## e2e tests used to execute flow on the Compose-Model based on input file.
 
-
 #### Start using `flow.yaml`:
 ##### `flow.yaml` is following the same concpets as `codefresh.yml`, means that it based on steps with types. 
+
+
+##### run all e2e-test: `yarn run e2e-test`
 
 
 ### Load step: `type: load`
