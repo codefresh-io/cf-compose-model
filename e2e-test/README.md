@@ -1,6 +1,6 @@
 # Yaml Flow e2e Tests
 
-## 2e2 Tests are tests of the Compose-Model that can easy test the Compose-Model on input
+## e2e tests used to execute flow on the Compose-Model based on input file.
 
 
 #### Start using `flow.yaml`:
