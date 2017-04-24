@@ -7,9 +7,7 @@ Using our compose model you can:
  * Verify that your composition is valid on Codefresh.io
  * Convert Composition from one type to another
 
-Start here:
- * `npm install` to install all dependencies
- * `node example.js` to run the basic examples we provided
+
 
 Road-map:
 - [X] Support Compose V1
@@ -20,34 +18,13 @@ Road-map:
 
 ## Documantation
 
-### Become familiar with ComposeModel structure
-ComposeModel holds inside 3 basic objects - each one of the objects holds in instances of `CFNode` class:
-* services
-* networks
-* volumes
+* [Getting Started](): run simple examples here
+* [Usage](): Api documentation 
 
-More objects that ComposeModel holds:
-* originalYaml - the yaml file ComposeModel parsed. Optional
-* parser - the original parser class that used to parse the yaml. Optional
-* defaultTranslator - the translator that will be used if no other translator will be passed in `translate` method. The defaultTranslator exist only if the ComposeModel parsed some yaml and a translator exist for it.
-* policy - set of instructions that tell ComposeModel what are to possible warnings may each CFNode and CFLeaf have. The default value is the policy of the shared plan.
- 
-Methods of ComposeModel:
-* static:
-    * parse(yaml) - Parse an yaml, search for a parser for the yaml file, parse it and return ComposeModel instance. Throw an error `parser not found' if there is no parser.
-    * load(path) - Loads the yaml and parse it the same way the `parse` does.
-* public:
-    * getAllServices() - return an object with all the services
-    * getAllNetworks() - return an object with all the networks
-    * getAllVolumes() - return an object with all the volumes
-    * setPolicy(policy) - set the policy. Policies can be found in `lib/model/policies`.
-    * addService(service) - add new service to the model
-    * addNetwork(network) - add new network to the model
-    * addVolume(volume) - add new volume to the model
-    * translate(translator) - translate the model to yaml file, if translator not supplied the model will try to use the default translator if exist.
-    * getWarnings() - return an array with all the warnings related to the model and the policy
-    * fixWarnings(onlyAutoFix) - fix all the warnings on the model related to the policy. If `onlyAutoFix` flag is set then only warnings with this flag will be fixed. 
-
+CFService
+CFVolume
+CFNetwork
+CFPolicy
 
 
 
