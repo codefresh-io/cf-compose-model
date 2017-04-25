@@ -12,7 +12,7 @@ Start here:
  * `node example.js` to run the basic examples we provided
  
  
-# Run and create e2e-test using `flow.yaml`: [link](#/e2e-test/README.md)
+### Run and create e2e-test using `flow.yaml`: [link](e2e-test/README.md)
  
 
 Road-map:
