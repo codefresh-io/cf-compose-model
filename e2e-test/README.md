@@ -5,10 +5,42 @@
 #### Start using `flow.yaml`:
 ##### `flow.yaml` is following the same concpets as `codefresh.yml`, means that it based on steps with types. 
 
-
 ##### run all e2e-test: `yarn run e2e-test`
 
+#### e2e-example
+`flow.yaml`
+```yaml
 
+# The test name
+name: 'Should parse compose v1 and translate it. The result should be the same'
+
+steps:
+  # path should be relative to current dir
+  load-composition-step:
+    type: load
+    file: ./docker-compose.yaml
+    
+  # translate the compose and test it agains the result  
+  translate-to-yaml:
+    type: translate
+    result:
+      os:
+        image: ubuntu
+        ports:
+          - '80:80'
+```
+
+`docker-compose.yaml`
+
+```yaml
+os:
+  image: ubuntu
+  ports:
+    - '80:80'
+```
+
+
+## Steps documentation
 ### Load step: `type: load`
 | Name  | Type  | Additional  |
 | ------------ | ------------ | ------------ |
@@ -33,3 +65,6 @@
 | Name  | Type  | Additional  |
 | ------------ | ------------ | ------------ |
 | result  | Array of objects or `empty`  | Optional |
+
+
+
