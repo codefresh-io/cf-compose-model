@@ -1,0 +1,19 @@
+name: 'Should find errors when global volume is not valid'
+steps:
+  load:
+    type: load
+    file: ./docker-compose.yaml
+    on-fail:
+      # Should be string
+      message: |-
+       Error: PARSING_COMPOSE_FAILED
+       With message: Failed to parse compose object
+       Based on input:
+
+       "version: '2'\nservices:\n  my-service:\n    image: ubuntu\n\nvolumes:\n  db:\n    driver-1: local"
+
+      # Should be an array
+      errors-content:
+        - name: "FIELD_NOT_SUPPORTED"
+          message: "Field 'driver-1' is not supported by compose under volumes"
+          data: "local"

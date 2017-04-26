@@ -10,6 +10,10 @@ Using our compose model you can:
 Start here:
  * `npm install` to install all dependencies
  * `node example.js` to run the basic examples we provided
+ 
+ 
+### Run and create e2e-test using `flow.yaml`: [link](e2e-test/README.md)
+ 
 
 Road-map:
 - [X] Support Compose V1

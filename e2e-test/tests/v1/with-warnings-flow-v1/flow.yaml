@@ -1,0 +1,29 @@
+name: 'Should parse compose v1 and get the warning'
+
+steps:
+  # path should be relative to current dir
+  load:
+    type: load
+    file: ./docker-compose.yaml
+  get-warnings:
+    type: get-warnings
+    result:
+      - actual: |-
+          ports
+          80:80
+        autoFix: false
+        displayName: "ports"
+        message: "Warning: at service os.ports"
+        name: "FIELD_NOT_SUPPORTED_IN_POLICY"
+        requireManuallyFix: false
+        suggestion: "Port mapping not supported, try use 80"
+      - actual: |-
+          ports
+          90:90
+        autoFix: false
+        displayName: "ports"
+        message: "Warning: at service os.ports"
+        name: "FIELD_NOT_SUPPORTED_IN_POLICY"
+        requireManuallyFix: false
+        suggestion: "Port mapping not supported, try use 90"
+
