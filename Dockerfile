@@ -6,10 +6,10 @@ COPY ./package.json /app/
 
 RUN cd /app && yarn install
 
+WORKDIR /app
+
 RUN npm link
 
-COPY . /app/
-
-WORKDIR /app
+COPY . .
 
 ENTRYPOINT ['cm', 'test', '-f']
