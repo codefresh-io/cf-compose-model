@@ -1,6 +1,5 @@
 'use strict';
 
-const colors  = require('colors');
 const Promise = require('bluebird'); // jshint ignore:line
 
 class BaseStep {

@@ -2,12 +2,7 @@
 'use strict';
 
 const program = require('commander');
-const fs      = require('fs');
-const path    = require('path');
-const _       = require('lodash');
-const YAML    = require('js-yaml');
 const Promise = require('bluebird'); // jshint ignore:line
-const steps   = require('./../e2e-test/steps');
 
 program
     .version('0.0.1')

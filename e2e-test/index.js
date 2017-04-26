@@ -5,7 +5,6 @@ const path    = require('path');
 const _       = require('lodash');
 const YAML    = require('js-yaml');
 const Promise = require('bluebird'); // jshint ignore:line
-const colors  = require('colors');
 const steps   = require('./steps');
 
 function resolveDirecotory(pwd, filePath) {

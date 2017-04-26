@@ -3,9 +3,7 @@
 const fs      = require('fs');
 const path    = require('path');
 const _       = require('lodash');
-const YAML    = require('js-yaml');
 const Promise = require('bluebird'); // jshint ignore:line
-const steps   = require('./steps');
 
 
 
@@ -24,7 +22,7 @@ const folderIterator = (folderPath) => {
         } else if (cont === flowFileName) {
             it(`${contPath}/${flowFileName}`, function () {
                 runTest(folderPath, flowFileName);
-            })
+            });
         }
     });
 };

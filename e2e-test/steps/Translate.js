@@ -45,7 +45,7 @@ class Translate extends BaseStep {
                 }
                 if (this._stepData['to-file']) {
                     const location = path.resolve(this._stepData.fileDirectory, expectedResultObj['to-file']);
-                    console.log(`writing to the file ${location}`.red)
+                    console.log(`writing to the file ${location}`.red);
                     fs.writeFileSync(location, JSON.stringify(obj), 'utf-8');
                 }
                 expect(JSON.parse(expectedResult)).to.be.deep.equal(obj);

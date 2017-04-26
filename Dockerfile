@@ -6,10 +6,10 @@ COPY ./package.json /app/
 
 RUN cd /app && yarn install
 
+RUN npm link
+
 COPY . /app/
 
 WORKDIR /app
 
-CMD [ "yarn", "start" ]
-
-EXPOSE 3000
+ENTRYPOINT ['cm', 'test', '-f']
