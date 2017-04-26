@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "cm":"cli/index.js"
+    "cm": "cli/index.js"
   },
   "scripts": {
     "unit_test": "gulp lint && gulp unit_test",
@@ -45,6 +45,7 @@
     "run-sequence": "^1.1.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "cf-errors": "0.1.3",
     "commander": "^2.9.0",
     "js-yaml": "^3.2.6",
