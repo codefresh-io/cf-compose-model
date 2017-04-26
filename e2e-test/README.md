@@ -54,12 +54,15 @@ os:
 | Name  | Type  | Additional  |
 | ------------ | ------------ | ------------ |
 | to  | string  | `yaml` or `json` default is `yaml` |
+| print  | boolean  | if set to `true` will print the final translation |
 | result  | mixed  | Default is `yaml`. Will change to `json` when the `to` property is `json` |
 
 ### Get-warnings step: `type: get-warnings`
 | Name  | Type  | Additional  |
 | ------------ | ------------ | ------------ |
 | result  | Array of objects or `empty`  | Optional |
+| print  | boolean  | if set to `true` will print the final translation |
+
 
 ### Get-warnings step: `type: fix-warnings`
 | Name  | Type  | Additional  |

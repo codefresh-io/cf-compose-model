@@ -15,31 +15,29 @@ function formatAllWarnings(unformatted) {
 }
 
 class FixWarnings extends BaseStep {
-    constructor() {
-        super('fix-warnings');
+    constructor(name, obj) {
+        super('fix-warnings', name, obj);
     }
 
-    exec(fixWarningObj) {
-        return function (composeModel) {
+    exec(composeModel) {
+        const fixWarningObj = this._stepData;
+        if (!(composeModel instanceof ComposeModel)) {
+            return Promise.reject(new Error('Not invoked with ComposeModel instance'));
+        }
 
-            if (!(composeModel instanceof ComposeModel)) {
-                return Promise.reject(new Error('Not invoked with ComposeModel instance'));
-            }
+        return composeModel.fixWarnings()
+            .then(formatAllWarnings)
+            .then(remaningWarnings => {
+                const res = _.get(fixWarningObj, 'result');
+                if (res === 'empty') {
+                    expect(remaningWarnings).to.be.deep.equal([]);
+                }
+                else if (res) {
+                    expect(remaningWarnings).to.be.deep.equal(res);
+                }
+            })
+            .then(() => composeModel);
 
-            return composeModel.fixWarnings()
-                .then(formatAllWarnings)
-                .then(remaningWarnings => {
-                    const res = _.get(fixWarningObj, 'result');
-                    if (res === 'empty') {
-                        expect(remaningWarnings).to.be.deep.equal([]);
-                    }
-                    else if (res) {
-                        expect(remaningWarnings).to.be.deep.equal(res);
-                    }
-                })
-                .then(() => composeModel);
-
-        };
     }
 }
 
