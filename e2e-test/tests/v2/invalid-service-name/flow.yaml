@@ -1,0 +1,20 @@
+name: 'Should find errors realted to invalid service name'
+steps:
+  load:
+    type: load
+    file: ./docker-compose.yaml
+    on-fail:
+      # Should be string
+      message: |-
+       Error: PARSING_COMPOSE_FAILED
+       With message: Failed to parse compose object
+       Based on input:
+
+       "version: '2'\nservices:\n  my-service:123:\n    image: ubuntu"
+
+      # Should be an array
+      errors-content:
+        - fieldData: 'my-service:123'
+          fieldName: 'my-service:123'
+          message: 'Service name my-service:123 is not valid'
+          requireManuallyFix: true

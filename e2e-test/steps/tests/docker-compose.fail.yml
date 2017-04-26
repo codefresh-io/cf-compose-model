@@ -1,0 +1,3 @@
+os:
+  image:
+    - name: 1

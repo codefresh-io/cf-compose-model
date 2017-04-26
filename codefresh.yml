@@ -11,7 +11,15 @@ steps:
     image: ${{build_image}}
     commands:
       - yarn install
-      - yarn run test
+      - yarn run unit_test
+
+  e2e_test:
+    title: Running e2e tests
+    image: ${{build_image}}
+    commands:
+      - yarn install
+      - yarn run e2e_test
+
 
   push_to_registry:
     title: Pushing to registry...
