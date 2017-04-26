@@ -1,16 +1,13 @@
 ## Compose-Model usage
 
-* ComposeModel 
-* CmService
+* [ComposeModel](#ComposeModel)
+* [CmService](#CmService)
 * CmNetwork
 * CmVolume
 * CmPolicy
 * CmTranslator
 * CmWarning
 * CmImage
-
-
-
 
 
 # ComposeModel
@@ -50,7 +47,14 @@
 | addVolume 	| volume - `string` 	| CmService 	| VOLUME_EXIST 	| Add new volume to the service 	|
 | setImage 	| image - `string` 	| CmService 	|  	| Set the image of the service, this will replace previous image if exist 	|
 | get 	| [`string`] 	|  	|  	| * Get additional fields if exist on the service * Will not return image, volumes or ports 	|
-|  	|  	|  	|  	|  	|
-|  	|  	|  	|  	|  	|
-|  	|  	|  	|  	|  	|
+| getImage 	|  	| `CmImage` 	|  	|  	|
+| getPorts 	|  	| [`CmProt`] 	|  	|  	|
+| getVolumes 	|  	| [`CmServiceVolume`] 	|  	|  	|
+| getLabel	|  	| `string` 	|  	|  Return the value of the given label key	|
+| mapOverEnvironments	|  cb - `function(key, value)`	|  Promise	|  	| Iterate over all the environment variables 	|
+| mapOverLabels	|  cb - `function(key, value)`	|  Promise	|  	| Iterate over all the labels 	|
+| mapOverAdditionalData	| cb - `function(name, object)` 	| Promise	|  	| Iterate over all additional on the service |
+| mapOverVolumes	| cb - `function(name, CmServiceVolume)` 	| Promise	|  	|  Iterate over all the volumes of the service	|
+| mergeWith	| CmService 	| CmService	| Promise 	| Merge the given service with the current one when the priority is for the current service 	|
+| mapOverExposedPorts	|  	| Promise	|  	| Iterate over all ports that should the service expose 	|
 
