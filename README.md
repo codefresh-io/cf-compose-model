@@ -53,19 +53,20 @@ const ComposeModel = CM.ComposeModel;
 OR
 * clone this repo and `npm isntall`, `yarn` also supported
 
-# [Api reference](./Usage.md)
+# [Api reference](./Apireference.md)
 
-# [Getting started]('./GettingStarted)
 
 # Test
 
+* `npm run unit_test` 
+* `npm run e2e_test` using the `flow.yaml`
 
 
 # Road-map:
 - [X] Support Compose V1
 - [X] Support Compose V2
 - [X] Support Compose V3
-- [ ] CLI tool
+- [ ] CLI tool - [started!](https://github.com/codefresh-io/cf-compose-model/tree/compose-cli) 
 - [ ] ES5 module
 
 

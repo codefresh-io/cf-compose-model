@@ -1,11 +1,16 @@
 ## Compose-Model usage
 
-* [ComposeModel](#ComposeModel)
-* [CmService](#CmService)
+* [ComposeModel](#composemodel) 
+* [CmService](#cmservice)
 * CmNetwork
-* CmVolume
+* [CmVolume](#cmvolume)
 * CmPolicy
+    * Class that should extends the BasePolicy from `lib/model/policies/Base.js`
+    * Be singelton
+    * Should implement method `activate(CfComposeModel)`
+    * Should use the `ComposeModel` methods to manipulate it
 * CmTranslator
+    * 
 * CmWarning
 * CmImage
 
@@ -58,3 +63,12 @@
 | mergeWith	| CmService 	| CmService	| Promise 	| Merge the given service with the current one when the priority is for the current service 	|
 | mapOverExposedPorts	|  	| Promise	|  	| Iterate over all ports that should the service expose 	|
 
+
+# CmVolume
+| Name               | Params   | Returns | Throws                                                    | Additional                 |
+|--------------------|----------|---------|-----------------------------------------------------------|----------------------------|
+| isExternalVolume   |          | Boolean |                                                           |                            |
+| isUsingLocalDriver |          | Boolean |                                                           |                            |
+| setDriver          | `string` |         |                                                           |                            |
+| getDriver          |          | String  |                                                           |                            |
+| setExternal        |          |         | Cannot set external volume that use driver or driver_opts | Set the volume ad external |
