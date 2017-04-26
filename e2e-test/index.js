@@ -32,7 +32,10 @@ module.exports = {
 
             const factory = {
                 load: () => { return new steps.Load(stepName, stepValue); },
-                translate: () => { return new steps.Translate(stepName, stepValue); },
+                translate: () => {
+                    stepValue.fileDirectory = fileDirectory;
+                    return new steps.Translate(stepName, stepValue);
+                },
                 'get-warnings': () => { return new steps.GetWarnings(stepName, stepValue); },
                 'fix-warnings': () => { return new steps.FixWarnings(stepName, stepValue); }
             };

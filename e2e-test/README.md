@@ -56,6 +56,7 @@ os:
 | to  | string  | `yaml` or `json` default is `yaml` |
 | print  | boolean  | if set to `true` will print the final translation |
 | result  | mixed  | Default is `yaml`. Will change to `json` when the `to` property is `json` |
+| to-file  | string  | Write the translated compose model to the file, the file should be relative to the current `flow.yaml` location |
 
 ### Get-warnings step: `type: get-warnings`
 | Name  | Type  | Additional  |
