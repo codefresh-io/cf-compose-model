@@ -1,0 +1,5 @@
+os:
+  image: ubuntu
+  ports:
+    - '80:80'
+    - '90:90'

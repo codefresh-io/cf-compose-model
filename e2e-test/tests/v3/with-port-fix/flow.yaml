@@ -1,0 +1,48 @@
+name: 'Should find warnings related to ports mapping fix them and translate'
+steps:
+
+  #loading the docker-compose file related to current directory
+  load-step:
+    type: load
+    file: ./docker-compose.yaml
+
+  #getting all the errors
+  get-warnings-first-time:
+    type: get-warnings
+    result:
+      - actual: "ports\n80:8080"
+        autoFix: false
+        displayName: "ports"
+        message: "Warning: at service my-service.ports"
+        name: "FIELD_NOT_SUPPORTED_IN_POLICY"
+        requireManuallyFix: false
+        suggestion: "Port mapping not supported, try use 8080"
+      - actual: "ports\n443:8443"
+        autoFix: false
+        displayName: "ports"
+        message: "Warning: at service my-service.ports"
+        name: "FIELD_NOT_SUPPORTED_IN_POLICY"
+        requireManuallyFix: false
+        suggestion: "Port mapping not supported, try use 8443"
+
+  #fixing the errors - without any result testing at this step
+  fix-warnings:
+    type: fix-warnings
+
+  #getting the warnings again
+  #testing the result to by an empty since the previous step fixed them all
+  get-warnings-second-time:
+    type: get-warnings
+    result: empty
+
+  #translating the compose-model to yaml , should be the same as in result
+  translate-to-yaml:
+    type: translate
+    result:
+      version: '3'
+      services:
+        my-service:
+          image: ubuntu
+          ports:
+            - '8080'
+            - '8443'

@@ -1,0 +1,22 @@
+name: 'Should parse compose v1 and translate it. The result should be the same'
+
+steps:
+  # path should be relative to current dir
+  load-composition:
+    type: load
+    file: ./docker-compose.yaml
+  translate-to-yaml:
+    # to - yaml or json | default yaml
+    # the result should be the same format as the 'to' type
+    type: translate
+    to: json
+    result: |-
+      {
+        "os": {
+          "image": "ubuntu",
+          "ports": [
+            "80:80",
+            "90:90"
+          ]
+        }
+      }

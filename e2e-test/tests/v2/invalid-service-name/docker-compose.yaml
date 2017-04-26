@@ -1,0 +1,4 @@
+version: '2'
+services:
+  my-service:123:
+    image: ubuntu
