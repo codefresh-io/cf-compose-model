@@ -12,7 +12,20 @@ Start here:
  * `node example.js` to run the basic examples we provided
  
  
-### Run and create e2e-test using `flow.yaml`: [link](e2e-test/README.md)
+### Run and create e2e-test using [flow.yaml](CLI.md)
+
+* using `npm`
+    * `npm install -g cf-compose-model`
+    * `cm test -f {{flow.yaml}}` file
+* using docker image
+    * `docker pull docker pull codefreshio/cf-compose-model:cli`
+    * `docker run -t -v {{direcotry wtih flow.yaml}}:/flow codefreshio/cf-compose-model:cli test -f /flow/flow.yaml` 
+* manually
+    * clone this repo
+    * `npm install`
+    * `npm install -g mocha`
+    * add your tests to `e2e-test/test/{{your-test-directory}}`
+    * `mocha  /Users/oleg/workspace/codefresh/cf-compose-model/e2e-test/flow.spec.js`
  
 
 Road-map:
