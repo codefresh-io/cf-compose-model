@@ -35,7 +35,7 @@ steps:
     candidate: '${{build_image}}'
     tag: '${{CF_BRANCH}}'
 
-  push_to_registry:
+  push_cli_to_registry:
     title: Pushing to registry cli image...
     type: push
     candidate: '${{build_cli}}'
