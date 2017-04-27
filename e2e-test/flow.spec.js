@@ -21,7 +21,7 @@ const folderIterator = (folderPath) => {
             folderIterator(contPath);
         } else if (cont === flowFileName) {
             it(`${contPath}/${flowFileName}`, function () {
-                runTest(folderPath, flowFileName);
+                return runTest(folderPath, flowFileName);
             });
         }
     });

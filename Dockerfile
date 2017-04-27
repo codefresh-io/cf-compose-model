@@ -1,14 +1,14 @@
-FROM node:7.9.0
+FROM node:6.9.2
 
-RUN npm install -g git+https://github.com/codefresh-io/cf-compose-model.git#3343987a2f3e7eedf4b71c650f5da372202d6321
+RUN npm install --global yarn
 
 COPY ./package.json /app/
 
 RUN cd /app && yarn install
 
+COPY . /app/
+
 WORKDIR /app
 
-COPY . .
-
-ENTRYPOINT ["cm"]
+CMD [ "yarn", "start" ]
 
