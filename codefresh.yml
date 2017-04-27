@@ -17,6 +17,7 @@ steps:
   e2e_test:
     title: Running e2e tests
     image: ${{build_image}}
+    fail-fast: false
     commands:
       - yarn install
       - yarn run e2e_test
