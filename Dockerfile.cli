@@ -1,6 +1,6 @@
 FROM node:7.9.0
 
-RUN npm install -g cf-compose-model
+RUN npm install -g git+https://github.com/codefresh-io/cf-compose-cli.git#f3693fa4a8cff1aedf06956e8073e97348955600
 
 ENTRYPOINT ["cm"]
 
