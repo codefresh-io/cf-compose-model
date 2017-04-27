@@ -9,7 +9,7 @@ const steps   = require('./steps');
 const colors  = require('colors'); // jshint ignore:line
 
 function resolveDirecotory(pwd, filePath) {
-    return `${pwd}/${path.dirname(filePath)}`;
+    return path.resolve(pwd, path.dirname(filePath));
 }
 
 function resolveFileName(filePath) {
@@ -22,8 +22,9 @@ module.exports = {
 
         const fileName      = resolveFileName(flowFileName);
         const fileDirectory = resolveDirecotory(folderPath, flowFileName);
-
-        const flowFilePath  = path.resolve(fileDirectory, fileName);
+        console.log(`Working with file ${fileName}`);
+        console.log(`Working with path ${fileDirectory}`);
+        const flowFilePath  = path.resolve(__dirname, `${fileDirectory}/${fileName}`);
         let test            = fs.readFileSync(flowFilePath, 'utf8');
         test                = YAML.safeLoad(test);
         //force the first step to be load
