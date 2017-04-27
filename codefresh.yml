@@ -13,6 +13,14 @@ steps:
       - yarn install
       - yarn run unit_test
 
+  build_cli:
+    title: Building image for cli use
+    type: build
+    image_name: codefreshio/cf-compose-model
+    dockerfile: Dockerfile.cli
+    tag: cli
+
+
   e2e_test:
     title: Running e2e tests
     image: ${{build_image}}
@@ -26,6 +34,12 @@ steps:
     type: push
     candidate: '${{build_image}}'
     tag: '${{CF_BRANCH}}'
+
+  push_to_registry:
+    title: Pushing to registry cli image...
+    type: push
+    candidate: '${{build_cli}}'
+    tag: 'cli'
 
   deploy_to_npm:
     title: Publishing To Npm
