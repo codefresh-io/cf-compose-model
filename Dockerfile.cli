@@ -1,6 +1,6 @@
 FROM node:7.9.0
 
-RUN npm install -g npm i cf-compose-model
+RUN npm install -g cf-compose-model
 
 ENTRYPOINT ["cm"]
 

@@ -13,6 +13,6 @@ steps:
       os:
         image: ubuntu
         ports:
-          - '80:81'
+          - '80:80'
           - '90:90'
 
