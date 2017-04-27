@@ -64,7 +64,7 @@ describe('Get-Warnings steps testing', () => {
     });
 
     it('Should throw an error when the step invoke without composeModel', () => {
-        return new GetWarnings().exec({})()
+        return new GetWarnings().exec({})
             .catch((err) => {
                 expect(err.message).to.be.equal('Not invoked with ComposeModel instance');
             });

@@ -47,7 +47,7 @@ describe('Translate steps testing', () => {
     ];
 
     tests.map(test => {
-        it(test.title, () => {
+        it.skip(test.title, () => {
             const step = new TranslateStep();
             return ComposeModel.load(path.resolve(__dirname, test.file))
                 .then(step.exec(test.step))
