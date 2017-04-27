@@ -26,7 +26,7 @@ gulp.task('lint', ['clean'], function () {
 });
 
 gulp.task('unit_pre', function () {
-    return gulp.src(['**/*.js', '!runit.js', '!example.js', '!**/*.spec.js', '!**/node_modules/**/*.js', '!.debug/**/*.js', '!gulpfile.js', '!coverage/**/*.js', '!server/migration/**/*.js'])
+    return gulp.src(['!cli/**', '**/*.js', '!runit.js', '!example.js', '!**/*.spec.js', '!**/node_modules/**/*.js', '!.debug/**/*.js', '!gulpfile.js', '!coverage/**/*.js', '!server/migration/**/*.js'])
         .pipe(istanbul({ // Covering files
             instrumenter: isparta.Instrumenter,
             includeUntested: true
