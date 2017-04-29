@@ -3,13 +3,10 @@
 const fs      = require('fs');
 const path    = require('path');
 const _       = require('lodash');
-const Promise = require('bluebird'); // jshint ignore:line
-
-
+const runTest = require('./').run;
 
 const flowFileName = 'flow.yaml';
 
-const runTest = require('./').run;
 
 const folderIterator = (folderPath) => {
     console.log(`checking folder: ${folderPath} for flow tests to run`);

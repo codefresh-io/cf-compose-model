@@ -5,18 +5,22 @@ const cm           = require('./../../');
 const Promise      = require('bluebird'); // jshint ignore:line
 const _            = require('lodash');
 const ComposeModel = cm.ComposeModel;
-
-const chai   = require('chai');
-const expect = chai.expect;
-
-
-function formatAllWarnings(unformatted) {
-    return Promise.map(unformatted, (warning) => { return warning.format(); });
-}
+require('console.table'); // jshint ignore:line
 
 class FixWarnings extends BaseStep {
     constructor(name, obj) {
         super('fix-warnings', name, obj);
+    }
+
+
+    /**
+     * Overwrite the base _writeOutputToConsole
+     * @param warnings
+     * @private
+     */
+    _writeOutputToConsole(warnings) {
+        console.log(`Warning:`.bold);
+        console.table(warnings);
     }
 
     exec(composeModel) {
@@ -26,14 +30,17 @@ class FixWarnings extends BaseStep {
         }
 
         return composeModel.fixWarnings()
-            .then(formatAllWarnings)
+            .then(this.formatAllWarnings.bind(this))
             .then(remaningWarnings => {
+                if (_.size(remaningWarnings) > 0) {
+                    this._writeOutput(remaningWarnings, 'The remaining warnings are:');
+                }
                 const res = _.get(fixWarningObj, 'result');
                 if (res === 'empty') {
-                    expect(remaningWarnings).to.be.deep.equal([]);
+                    this._invokeAssertion(remaningWarnings, []);
                 }
                 else if (res) {
-                    expect(remaningWarnings).to.be.deep.equal(res);
+                    this._invokeAssertion(remaningWarnings, res);
                 }
             })
             .then(() => composeModel);

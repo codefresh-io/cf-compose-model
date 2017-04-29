@@ -1,14 +1,11 @@
 'use strict';
 
+const fs   = require('fs');
+const path = require('path');
+const YAML = require('js-yaml');
+const _    = require('lodash');
+
 const BaseStep = require('./BaseStep');
-const YAML     = require('js-yaml');
-const fs       = require('fs');
-const path     = require('path');
-
-const chai   = require('chai');
-const expect = chai.expect;
-
-
 
 class Translate extends BaseStep {
     constructor(name, obj) {
@@ -21,15 +18,8 @@ class Translate extends BaseStep {
         return promise.toYaml()
             .then(translated => {
                 const yaml = YAML.safeDump(expectedResult);
-                if (this._stepData.print) {
-                    console.log('The final translation is:');
-                    console.log(yaml.yellow);
-                }
-                if (this._stepData['to-file']) {
-                    const location = path.resolve(this._stepData.fileDirectory, expectedResultObj['to-file']);
-                    fs.writeFileSync(location, translated);
-                }
-                expect(translated).to.be.equal(yaml);
+                this._writeOutput(translated, 'The final translation is:');
+                this._invokeAssertion(translated, yaml);
                 return translated;
             });
     }
@@ -39,16 +29,8 @@ class Translate extends BaseStep {
         const expectedResult    = expectedResultObj.result;
         return promise.toJson()
             .then(obj => {
-                if (this._stepData.print) {
-                    console.log('The final translation is:');
-                    console.log(obj.yellow);
-                }
-                if (this._stepData['to-file']) {
-                    const location = path.resolve(this._stepData.fileDirectory, expectedResultObj['to-file']);
-                    console.log(`writing to the file ${location}`.red);
-                    fs.writeFileSync(location, JSON.stringify(obj), 'utf-8');
-                }
-                expect(JSON.parse(expectedResult)).to.be.deep.equal(obj);
+                this._writeOutput(obj, 'The final translation is:');
+                this._invokeAssertion(JSON.parse(expectedResult), obj);
                 return obj;
             });
     }

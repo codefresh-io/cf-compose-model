@@ -6,9 +6,6 @@ const path         = require('path');
 const ComposeModel = cm.ComposeModel;
 const policies     = cm.policies;
 
-const chai   = require('chai');
-const expect = chai.expect;
-
 class Load extends BaseStep {
     constructor(name, obj) {
         super('load', name, obj);
@@ -29,11 +26,11 @@ class Load extends BaseStep {
                 if (stepObject['on-fail'] && err.isCmError) {
                     const onFail = stepObject['on-fail'];
                     if (onFail.message) {
-                        expect(err.toString()).to.be.deep.equal(onFail.message);
+                        this._invokeAssertion(err.toString(), onFail.message);
                     }
                     if (onFail['errors-content']) {
                         const errors = err.getErrors().map(err => err.format());
-                        expect(errors).to.be.deep.equal(onFail['errors-content']);
+                        this._invokeAssertion(errors, onFail['errors-content']);
                     }
                 } else {
                     throw err;

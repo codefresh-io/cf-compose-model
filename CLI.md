@@ -55,20 +55,28 @@ os:
 | ------------ | ------------ | ------------ |
 | to  | string  | `yaml` or `json` default is `yaml` |
 | print  | boolean  | if set to `true` will print the final translation |
+| output  | object  | define  what to do with the translated object |
+| output.console  | boolean  | print the translation to the console |
+| output.file  | string  | write the translated compose model to the file, the file should be relative to the current `flow.yaml` location |
 | result  | mixed  | Default is `yaml`. Will change to `json` when the `to` property is `json` |
-| to-file  | string  | Write the translated compose model to the file, the file should be relative to the current `flow.yaml` location |
 
 ### Get-warnings step: `type: get-warnings`
 | Name  | Type  | Additional  |
 | ------------ | ------------ | ------------ |
 | result  | Array of objects or `empty`  | Optional |
 | print  | boolean  | if set to `true` will print the final translation |
+| output  | object  | define  what to do with the translated object |
+| output.console  | boolean  | print the warnings to the console |
+| output.file  | string  | write the warning to the file, the file should be relative to the current `flow.yaml` location |
 
 
-### Get-warnings step: `type: fix-warnings`
+### Fix-warnings step: `type: fix-warnings`
 | Name  | Type  | Additional  |
 | ------------ | ------------ | ------------ |
 | result  | Array of objects or `empty`  | Optional |
+| output  | object  | define  what to do with the translated object |
+| output.console  | boolean  | print the remaining to the console |
+| output.file  | string  | write the remaining warning to the file, the file should be relative to the current `flow.yaml` location |
 
 
 

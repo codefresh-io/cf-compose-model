@@ -1,6 +1,14 @@
 FROM node:7.9.0
 
-RUN npm install -g git+https://github.com/codefresh-io/cf-compose-model.git#f3693fa4a8cff1aedf06956e8073e97348955600
+WORKDIR /cli
+
+COPY ./package.json ./
+
+RUN yarn install --prod
+
+COPY . .
+
+RUN yarn link
 
 ENTRYPOINT ["cm"]
 

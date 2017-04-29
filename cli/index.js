@@ -2,7 +2,6 @@
 'use strict';
 
 const program = require('commander');
-const Promise = require('bluebird'); // jshint ignore:line
 
 program
     .version('0.0.1')
@@ -16,7 +15,7 @@ program
     .option("-f, --flow <path>", "The flow.yaml file")
     .action(function (cmd) {
         const run = require('./../e2e-test').run;
-        return run(process.env.PWD, cmd);
+        return run(process.env.PWD, cmd).done();
     });
 
 program.on('--help', function () {

@@ -5,15 +5,21 @@ const cm           = require('./../../');
 const Promise      = require('bluebird'); // jshint ignore:line
 const _            = require('lodash');
 const ComposeModel = cm.ComposeModel;
-
-const chai   = require('chai');
-const expect = chai.expect;
-
-
+require('console.table'); // jshint ignore:line
 
 class GetWarnings extends BaseStep {
     constructor(name, obj) {
         super('get-warnings', name, obj);
+    }
+
+    /**
+     * Overwrite the base _writeOutputToConsole
+     * @param warnings
+     * @private
+     */
+    _writeOutputToConsole(warnings) {
+        console.log(`Warning:`.bold);
+        console.table(warnings);
     }
 
     exec(composeModel) {
@@ -26,17 +32,12 @@ class GetWarnings extends BaseStep {
             .then(result => {
                 const res = _.get(warningsObject, 'result');
                 if (res === 'empty') {
-                    expect(result).to.be.deep.equal([]);
+                    this._invokeAssertion(result, []);
                 }
                 else if (res) {
-                    expect(result).to.be.deep.equal(warningsObject.result);
+                    this._invokeAssertion(result, warningsObject.result);
                 }
-                if(warningsObject.print){
-                    result.map((warning) => {
-                        console.log(`Warning:`.bold);
-                        console.log(JSON.stringify(warning).yellow);
-                    });
-                }
+                this._writeOutput(result, 'Found warnings:');
                 return composeModel;
             });
 
