@@ -61,7 +61,7 @@ Read about [`flow.yaml`](CLI.md)
     * `npm install -g cf-compose-model`
     * `cm test -f {{flow.yaml}}` file
 * using docker image
-    * `docker pull docker pull codefreshio/cf-compose-model:cli`
+    * `docker pull codefreshio/cf-compose-model:cli`
     * `docker run -t -v {{direcotry wtih flow.yaml}}:/flow codefreshio/cf-compose-model:cli test -f /flow/flow.yaml` 
 * manually
     * clone this repo
@@ -85,7 +85,3 @@ Read about [`flow.yaml`](CLI.md)
 - [X] Support Compose V3
 - [ ] CLI tool - [started!](https://github.com/codefresh-io/cf-compose-model/tree/compose-cli) 
 - [ ] ES5 module
-
-
-
-
