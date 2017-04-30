@@ -5,7 +5,6 @@ const cm           = require('./../../');
 const Promise      = require('bluebird'); // jshint ignore:line
 const _            = require('lodash');
 const ComposeModel = cm.ComposeModel;
-require('console.table'); // jshint ignore:line
 
 class FixWarnings extends BaseStep {
     constructor(name, obj) {

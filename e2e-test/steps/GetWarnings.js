@@ -5,7 +5,7 @@ const cm           = require('./../../');
 const Promise      = require('bluebird'); // jshint ignore:line
 const _            = require('lodash');
 const ComposeModel = cm.ComposeModel;
-require('console.table'); // jshint ignore:line
+const Table = require('cli-table');
 
 class GetWarnings extends BaseStep {
     constructor(name, obj) {
@@ -19,7 +19,16 @@ class GetWarnings extends BaseStep {
      */
     _writeOutputToConsole(warnings) {
         console.log(`Warning:`.bold);
-        console.table(warnings);
+        const table = new Table({
+            head: ['Actual', 'Suggestion', 'Message'],
+
+        });
+        const values = warnings.map(warning => {
+            const arr = [warning.actual, warning.suggestion, warning.message];
+            return arr;
+        });
+        values.map(value => table.push(value));
+        console.log(table.toString());
     }
 
     exec(composeModel) {
