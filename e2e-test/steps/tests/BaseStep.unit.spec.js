@@ -2,7 +2,6 @@
 
 const chai       = require('chai');
 const sinonChai  = require('sinon-chai');
-const sinon      = require('sinon');
 const proxyquire = require('proxyquire'); // jshint ignore:line
 const BaseStep = require('./../BaseStep');
 
