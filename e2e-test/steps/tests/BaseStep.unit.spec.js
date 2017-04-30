@@ -31,10 +31,4 @@ describe('Base steps testimg', () => {
             expect(err.message).to.be.deep.equal('Not implemented');
         }
     });
-
-    const spies = {
-        _writeOutputToConsole: sinon.spy((output) => {
-           return;
-        })
-    };
 });
