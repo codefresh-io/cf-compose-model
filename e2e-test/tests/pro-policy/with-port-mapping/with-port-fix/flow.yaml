@@ -9,6 +9,8 @@ steps:
   get-warnings-first-time:
     type: get-warnings
     result: # no warnings
+    output:
+      console:
 
 
   translate-to-yaml:

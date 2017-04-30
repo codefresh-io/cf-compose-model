@@ -18,6 +18,9 @@ describe('Get-Warnings steps testing', () => {
         {
             title: 'Should get the warnings',
             step: {
+                output: {
+                    console: null
+                },
                 result: [
                     {
                         "actual": "ports\n80:80",
@@ -55,9 +58,9 @@ describe('Get-Warnings steps testing', () => {
 
     tests.map(test => {
         it(test.title, () => {
-            const step = new GetWarnings();
+            const step = new GetWarnings('step-name', test.step);
             return ComposeModel.load(path.resolve(__dirname, test.file))
-                .then(step.exec(test.step))
+                .then(step.exec.bind(step))
                 .then(test.then)
                 .catch(test.catch);
         });
@@ -71,15 +74,15 @@ describe('Get-Warnings steps testing', () => {
     });
 
     it('Should test when result passed as string empty', () => {
-        const step = new GetWarnings();
+        const step = new GetWarnings('step-name', {
+            result: 'empty'
+        });
         return ComposeModel.parse({
             os: {
                 image: 'ubuntu'
             }
         })
-            .then(step.exec({
-                result: 'empty'
-            }))
+            .then(step.exec.bind(step))
             .then(result => {
                 expect(result).to.be.an.instanceof(ComposeModel);
             })

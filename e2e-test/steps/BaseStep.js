@@ -6,12 +6,7 @@ const path    = require('path');
 const fs      = require('fs');
 const colors  = require('colors'); // jshint ignore:line
 
-let chai;
-try {
-    chai = require('chai');
-} catch (err) {
-    chai = {}
-}
+let chai = require('chai');
 
 const expect = chai.expect;
 
@@ -39,10 +34,6 @@ class BaseStep {
 
     formatAllWarnings(unformatted) {
         return Promise.map(unformatted, (warning) => { return warning.format(); });
-    }
-
-    throwError(string) {
-        console.log(string.red);
     }
 
     _writeOutputToConsole(output) {
@@ -79,11 +70,7 @@ class BaseStep {
     }
 
     _invokeAssertion(expected, actual) {
-        try {
-            expect(expected).to.be.deep.equal(actual);
-        } catch (err) {
-            throw err;
-        }
+        expect(expected).to.be.deep.equal(actual);
     }
 
 }

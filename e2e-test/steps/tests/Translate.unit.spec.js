@@ -18,6 +18,9 @@ describe('Translate steps testing', () => {
         {
             title: 'Should translate',
             step: {
+                output: {
+                    console: undefined,
+                },
                 result: {
                     os: {
                         image: 'ubuntu',
@@ -47,10 +50,10 @@ describe('Translate steps testing', () => {
     ];
 
     tests.map(test => {
-        it.skip(test.title, () => {
-            const step = new TranslateStep();
+        it(test.title, () => {
+            const step = new TranslateStep('step-name', test.step);
             return ComposeModel.load(path.resolve(__dirname, test.file))
-                .then(step.exec(test.step))
+                .then(step.exec.bind(step))
                 .catch(test.catch);
 
         });

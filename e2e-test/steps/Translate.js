@@ -44,11 +44,7 @@ class Translate extends BaseStep {
         };
 
         if (cases[expectedResultObj.to]) {
-            return cases[expectedResultObj.to](composeModel.translate())
-                .catch((err) => {
-                    this.throwError(`Translation to ${expectedResultObj.to} failed`);
-                    throw err;
-                });
+            return cases[expectedResultObj.to](composeModel.translate());
         } else {
             return Promise.reject(new Error(`Translation method ${expectedResultObj.to} not supported`));
         }

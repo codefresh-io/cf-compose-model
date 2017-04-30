@@ -81,9 +81,9 @@ describe('Load steps testing', () => {
     ];
 
     tests.map(test => {
-        it.skip(test.title, () => {
-            const step = new LoadStep();
-            return step.exec(__dirname)()
+        it(test.title, () => {
+            const step = new LoadStep('step-name', test.step);
+            return step.exec(__dirname)
                 .catch(test.catch)
                 .then(test.then ? test.then : () => {});
         });
