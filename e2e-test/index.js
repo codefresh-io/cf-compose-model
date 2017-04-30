@@ -37,8 +37,16 @@ module.exports = {
                     stepValue.fileDirectory = fileDirectory;
                     return new steps.Translate(stepName, stepValue);
                 },
-                'get-warnings': () => { return new steps.GetWarnings(stepName, stepValue); },
-                'fix-warnings': () => { return new steps.FixWarnings(stepName, stepValue); }
+                'get-warnings': () => {
+                    stepValue.fileDirectory = fileDirectory;
+                    return new steps.GetWarnings(stepName, stepValue);
+                },
+                'fix-warnings': () => {
+                    stepValue.fileDirectory = fileDirectory;
+
+
+                    return new steps.FixWarnings(stepName, stepValue);
+                }
             };
             if (factory[stepValue.type]) {
                 console.log(`Preparing step ${stepName}`);

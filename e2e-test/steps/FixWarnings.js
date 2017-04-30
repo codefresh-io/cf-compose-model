@@ -19,7 +19,16 @@ class FixWarnings extends BaseStep {
      */
     _writeOutputToConsole(warnings) {
         console.log(`Warning:`.bold);
-        console.table(warnings);
+        const table = new Table({
+            head: ['Actual', 'Suggestion', 'Message'],
+
+        });
+        const values = warnings.map(warning => {
+            const arr = [warning.actual, warning.suggestion, warning.message];
+            return arr;
+        });
+        values.map(value => table.push(value));
+        console.log(table.toString());
     }
 
     exec(composeModel) {

@@ -41,10 +41,8 @@ class BaseStep {
     }
 
     _writeOutputToFile(output) {
-        const isJson   = _.get(output, 'file', '').split('.').reverse()[0].toLowerCase() ===
-                         'json';
-        const location = path.resolve(this._stepData.fileDirectory,
-            _.get(this, '_stepData.output.file'));
+        const isJson   = _.get(output, 'file', '').split('.').reverse()[0].toLowerCase() === 'json';
+        const location = path.resolve(this._stepData.fileDirectory, _.get(this, '_stepData.output.file'));
         console.log(`Writing result of step ${this.getName()} to file ${location}`.bold);
         if (isJson) {
             fs.writeFileSync(location, JSON.stringify(output), 'utf-8');
