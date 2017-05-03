@@ -73,3 +73,28 @@ gulp.task('coveralls', function (callback) {
     }
 });
 
+
+gulp.task('e2e_test_pre', function () {
+    return gulp.src(['e2e-test/flow.spec.js'])
+        .pipe(istanbul({ // Covering files
+            instrumenter: isparta.Instrumenter,
+            includeUntested: true
+        }))
+        .pipe(istanbul.hookRequire()) // Force `require` to return covered files
+        .on('finish', function () {
+            gulp.src(['e2e-test/flow.spec.js'], { read: false })
+                .pipe(mocha({ reporter: 'spec', timeout: '10000' }))
+                .pipe(istanbul.writeReports({
+                    reporters: ['lcov'],
+                    reportOpts: { dir: 'coverage' }
+                }))
+                .once('end', function () {
+                    process.exit();
+                });
+        });
+});
+
+gulp.task('e2e_test', function (callback) {
+    runSequence('e2e_test_pre',
+        callback);
+});

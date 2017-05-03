@@ -1,10 +1,11 @@
 {
   "name": "cf-compose-model",
-  "version": "0.0.651",
+  "version": "0.0.656",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "gulp lint && gulp unit_test",
+    "unit_test": "gulp lint && gulp unit_test",
+    "e2e_test": "gulp lint && gulp e2e_test",
     "ci-publish": "ci-publish"
   },
   "repository": {
