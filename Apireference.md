@@ -10,9 +10,8 @@
     * Should implement method `activate(CfComposeModel)`
     * Should use the `ComposeModel` methods to manipulate it
 * CmTranslator
-    * 
 * CmWarning
-* CmImage
+* [CmImage](#cmimage)
 
 
 # ComposeModel
@@ -72,3 +71,14 @@
 | setDriver          | `string` |         |                                                           |                            |
 | getDriver          |          | String  |                                                           |                            |
 | setExternal        |          |         | Cannot set external volume that use driver or driver_opts | Set the volume ad external |
+
+# CmImage
+
+| Name               | Params   | Returns | Throws                                                    | Additional                 |
+|--------------------|----------|---------|-----------------------------------------------------------|----------------------------|
+| constructor        | `string` | CmImage | `TYPE_NOT_MATCH`                                          |                            |
+| setRepo            | `string` | CmImage | `TYPE_NOT_MATCH`                                          | repository may include also the registry part                           |
+| getRepo            |          | string  | `TYPE_NOT_MATCH`                                          |                            |
+| setTag             | `string` | CmImage |                                                           |                            |
+| getTag             |          | string  |                                                           |                            |
+| getName            |          |         |                                                           | return the raw name of the image                           |
