@@ -1,6 +1,6 @@
 {
   "name": "cf-compose-model",
-  "version": "0.0.658",
+  "version": "0.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
