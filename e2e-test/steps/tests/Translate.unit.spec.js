@@ -22,7 +22,7 @@ describe('Translate steps testing', () => {
                     os: {
                         image: 'ubuntu',
                         ports: ['80:80'],
-                        volumes: ['./app:/app']
+                        volumes: ['/app:/app']
                     }
                 }
             },
@@ -31,7 +31,7 @@ describe('Translate steps testing', () => {
             title: 'Should translate to json',
             step: {
                 to: 'json',
-                result: `{"os": {"image": "ubuntu","ports": ["80:80"], "volumes": ["./app:/app"]}}`
+                result: `{"os": {"image": "ubuntu","ports": ["80:80"], "volumes": ["/app:/app"]}}`
             },
             file: './docker-compose.success.yml'
         }, {

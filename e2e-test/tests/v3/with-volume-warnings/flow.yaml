@@ -13,7 +13,7 @@ steps:
     type: fix-warnings
     result:
       - actual: |-
-            ./app
+            /app
             /app
         autoFix: false
         displayName: 'volumes'
@@ -35,4 +35,4 @@ steps:
         my-service:
           image: ubuntu
           volumes:
-            - './app:/app'
+            - '/app:/app'

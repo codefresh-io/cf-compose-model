@@ -155,7 +155,7 @@ scheduler:
   - mesosmaster1
   - apiserver
   volumes:
-  - ./static-pod.json:/opt/static-pods/static-pod.json
+  - /static-pod.json:/opt/static-pods/static-pod.json
 keygen:
   image: mesosphere/kubernetes-keygen:v1.0.0
   command:
