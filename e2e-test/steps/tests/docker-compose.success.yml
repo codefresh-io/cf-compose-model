@@ -3,4 +3,4 @@ os:
   ports:
     - '80:80'
   volumes:
-    - './app:/app'
+    - '/app:/app'

@@ -3,4 +3,4 @@ services:
   my-service:
     image: ubuntu
     volumes:
-      - './app:/app'
+      - '/app:/app'

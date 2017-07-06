@@ -20,7 +20,7 @@ describe('Fix-Warnings steps testing', () => {
             step: {
                 result: [
                     {
-                        "actual": "./app\n/app",
+                        "actual": "/app\n/app",
                         "autoFix": false,
                         "displayName": "volumes",
                         "message": "Warning: at service os.volumes",

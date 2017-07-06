@@ -29,7 +29,7 @@ describe('Get-Warnings steps testing', () => {
                         "suggestion": "Port mapping not supported, try use 80"
                     },
                     {
-                        "actual": "./app\n/app",
+                        "actual": "/app\n/app",
                         "autoFix": false,
                         "displayName": "volumes",
                         "message": "Warning: at service os.volumes",
