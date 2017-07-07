@@ -11,6 +11,7 @@ steps:
     image: ${{build_image}}
     commands:
       - yarn install
+      - yarn no.onlys
       - yarn run unit_test
 
   e2e_test:
