@@ -4,7 +4,7 @@ steps:
   build_image:
     title: Build image ...
     type: build
-    image_name: codefreshio/cf-compose-model
+    image_name: codefresh/cf-compose-model
 
   unit_test:
     title: Running unit tests
