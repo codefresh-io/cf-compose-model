@@ -44,3 +44,4 @@ steps:
         my-service:
           image: ubuntu
           privileged: true
+          user: '0'

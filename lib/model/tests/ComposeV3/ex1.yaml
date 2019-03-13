@@ -11,6 +11,7 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
+    user: '0'
 
   db:
     image: postgres:9.4
@@ -21,6 +22,7 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
+    user: '0'
 
   voting-app:
     image: gaiadocker/example-voting-app-vote:good
@@ -36,6 +38,7 @@ services:
       labels: [APP=VOTING]
       placement:
         constraints: [node.role == worker]
+    user: '0'
 
   result-app:
     image: gaiadocker/example-voting-app-result:latest
@@ -45,6 +48,7 @@ services:
       - voteapp
     depends_on:
       - db
+    user: '0'
 
   worker:
     image: gaiadocker/example-voting-app-worker:latest
@@ -86,6 +90,7 @@ services:
       # placement constraint - in this case on 'worker' nodes only
       placement:
         constraints: [node.role == worker]
+    user: '0'
 
 networks:
     voteapp:

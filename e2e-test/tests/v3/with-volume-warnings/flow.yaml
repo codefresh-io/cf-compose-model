@@ -36,3 +36,4 @@ steps:
           image: ubuntu
           volumes:
             - '/app:/app'
+          user: '0'
