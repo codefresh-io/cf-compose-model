@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  with-user:
+    user: 'from-yaml'
+    image: image
+  without-user:
+    image: image
