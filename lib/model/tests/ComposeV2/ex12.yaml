@@ -1,0 +1,14 @@
+#check that mapping from ${{CF_VOLUME}} allowed
+version: '2'
+services:
+  web:
+    image: express
+    volumes:
+      - ${{CF_VOLUME}}:/app
+  db:
+    image: redis
+    volumes:
+      ${{CF_VOLUME}}: /app
+volumes:
+  my-volume1:
+    external: true
