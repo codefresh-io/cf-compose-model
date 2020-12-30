@@ -6,6 +6,23 @@ steps:
     type: build
     image_name: codefresh/cf-compose-model
 
+  security_scan:
+    image: aquasec/trivy:latest
+    title: "Scanning lockfile for security vulnerablities"
+    fail_fast: false
+    commands:
+      - '! rm ${{SEC_SCAN_REPORT_FILE}} 2>/dev/null'
+      - |-
+        set -eo pipefail; \
+        trivy \
+          fs \
+          --quiet \
+          --ignorefile /tmp/.trivy/trivyignore \
+          --ignore-unfixed \
+          --exit-code 1 \
+          . \
+          | tee ${{SEC_SCAN_REPORT_FILE}}
+
   unit_test:
     title: Running unit tests
     image: ${{build_image}}

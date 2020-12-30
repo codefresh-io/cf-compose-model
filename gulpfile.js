@@ -2,8 +2,6 @@ var gulp        = require('gulp');
 var jshint      = require('gulp-jshint');
 var rimraf      = require('gulp-rimraf');
 var runSequence = require('run-sequence');
-var fs          = require('fs');
-var coveralls   = require('gulp-coveralls');
 var istanbul    = require('gulp-istanbul');
 var isparta     = require('isparta');
 var mocha       = require('gulp-mocha');
@@ -54,25 +52,6 @@ gulp.task('unit_test', function (callback) {
     runSequence('unit_pre',
         callback);
 });
-
-gulp.task('coveralls', function (callback) {
-    var repo_token = process.env.COVERALLS_TOKEN;
-    if (!repo_token) {
-        return callback(new Error("COVERALLS_TOKEN environment variable is missing"));
-    }
-    else {
-        fs.writeFile(".coveralls.yml", "service_name: codefresh-io\nrepo_token: " + repo_token, function (err) {
-            if (err) {
-                callback(err);
-            }
-            else {
-                gulp.src('coverage/lcov.info')
-                    .pipe(coveralls());
-            }
-        });
-    }
-});
-
 
 gulp.task('e2e_test_pre', function () {
     return gulp.src(['e2e-test/flow.spec.js'])
