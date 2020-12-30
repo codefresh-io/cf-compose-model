@@ -8,6 +8,9 @@
     "e2e_test": "gulp lint && gulp e2e_test",
     "ci-publish": "ci-publish"
   },
+  "resolutions": {
+    "natives": "1.1.6"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codefresh-io/cf-compose-model.git"
