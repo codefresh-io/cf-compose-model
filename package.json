@@ -1,12 +1,11 @@
 {
   "name": "cf-compose-model",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "unit_test": "gulp lint && gulp no.onlys && gulp unit_test",
-    "e2e_test": "gulp lint && gulp e2e_test",
-    "ci-publish": "ci-publish"
+    "e2e_test": "gulp lint && gulp e2e_test"
   },
   "resolutions": {
     "natives": "1.1.6"
@@ -23,7 +22,6 @@
   "homepage": "https://github.com/codefresh-io/cf-compose-model#readme",
   "devDependencies": {
     "chai": "^3.0.0",
-    "ci-publish": "^1.3.0",
     "gulp": "^3.9.1",
     "gulp-env": "^0.2.0",
     "gulp-git": "^1.2.1",
@@ -45,7 +43,7 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "js-yaml": "^3.14.1",
-    "lodash": "^3.6.0",
+    "lodash": "4.17.20",
     "type-detect": "^4.0.0",
     "yamljs": "^0.2.8"
   }
