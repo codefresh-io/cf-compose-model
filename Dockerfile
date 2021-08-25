@@ -1,6 +1,4 @@
-FROM node:10.15.3
-
-RUN npm install --global yarn
+FROM node:10-alpine
 
 COPY ./package.json /app/
 

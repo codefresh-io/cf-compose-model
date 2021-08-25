@@ -21,7 +21,6 @@ steps:
         set -eo pipefail; \
         trivy \
           fs \
-          --quiet \
           --ignorefile /tmp/.trivy/trivyignore \
           --ignore-unfixed \
           --exit-code 1 \
@@ -32,22 +31,13 @@ steps:
     title: Running unit tests
     image: ${{build_image}}
     commands:
-      - yarn install
       - yarn run unit_test
 
   e2e_test:
     title: Running e2e tests
     image: ${{build_image}}
     commands:
-      - yarn install
       - yarn run e2e_test
-
-
-  push_to_registry:
-    title: Pushing to registry...
-    type: push
-    candidate: '${{build_image}}'
-    tag: '${{CF_BRANCH}}'
 
   deploy_to_npm:
     type: npm-publish
