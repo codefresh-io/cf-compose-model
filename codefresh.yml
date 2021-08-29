@@ -11,7 +11,6 @@ steps:
     title: Build image ...
     type: build
     image_name: codefresh/cf-compose-model
-    disable_push: true
 
   security_scan:
     image: aquasec/trivy:latest
