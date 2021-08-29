@@ -5,11 +5,13 @@ steps:
     type: git-clone
     repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
     revision: '${{CF_REVISION}}'
+    git: cf_github
 
   build_image:
     title: Build image ...
     type: build
     image_name: codefresh/cf-compose-model
+    disable_push: true
 
   security_scan:
     image: aquasec/trivy:latest
